@@ -1,4 +1,4 @@
-![alt text](https://github.com/Singularity-Coder/Code-Snippets-JetpackCompose/blob/main/assets/banner_compose.png)
+![alt text](https://github.com/Singularity-Coder/Composables/blob/main/assets/banner_compose.png)
 # Composables
 List of Android's Jetpack Compose topics and their code snippets!
 
