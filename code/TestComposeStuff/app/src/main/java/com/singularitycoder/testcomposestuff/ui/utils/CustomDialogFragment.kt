@@ -16,13 +16,13 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.fragment.app.DialogFragment
 import com.singularitycoder.testcomposestuff.ui.theme.AppColor
-import com.singularitycoder.testcomposestuff.ui.utils.VerticalSpace
 
 class CustomDialogFragment(
     val title: String = "NA",
@@ -50,55 +50,44 @@ class CustomDialogFragment(
     @Composable
     fun CustomAlertDialog() {
         @Composable
-        fun Words(
-            text: String,
-            fontSize: TextUnit,
-            fontWeight: FontWeight?
-        ) = Text(
+        fun Words(text: String, fontSize: TextUnit, fontWeight: FontWeight?) = Text(
             text = text,
             fontSize = fontSize,
             fontWeight = fontWeight,
             color = AppColor.LightBlack,
             textAlign = TextAlign.Start,
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth(),
+            maxLines = 8,
+            overflow = TextOverflow.Ellipsis
         )
 
         @Composable
-        fun Action(
-            actionText: String,
-            action: () -> Unit
-        ) = Button(
+        fun AlertBtn(actionText: String, action: () -> Unit) = Button(
             elevation = ButtonDefaults.elevation(defaultElevation = 0.dp, pressedElevation = 0.dp, disabledElevation = 0.dp),
             colors = ButtonDefaults.buttonColors(backgroundColor = AppColor.Transparent, contentColor = AppColor.Purple500),
             onClick = action
         ) { Text(actionText) }
 
-        Column(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalAlignment = Alignment.Start
-        ) {
+        Column(modifier = Modifier.fillMaxWidth(), horizontalAlignment = Alignment.Start) {
             if (image != android.R.drawable.ic_delete) Image(
                 painter = painterResource(id = image),
                 contentDescription = imgContentDesc,
-                modifier = Modifier.size(160.dp),
+                modifier = Modifier.fillMaxWidth().height(160.dp),
                 contentScale = ContentScale.Crop
             )
-            if (image != android.R.drawable.ic_delete) VerticalSpace(spacing = 24.dp)
+            if (image != android.R.drawable.ic_delete) 24.dp.VerticalSpace()
             if ("NA" != title) Words(text = title, fontSize = 18.sp, fontWeight = FontWeight.Bold)
-            if ("NA" != title) VerticalSpace(spacing = 12.dp)
+            if ("NA" != title) 12.dp.VerticalSpace()
             if ("NA" != message) Words(text = message, fontSize = 16.sp, fontWeight = FontWeight.Normal)
-            if ("NA" != message) VerticalSpace(spacing = 24.dp)
-            Row(
-                horizontalArrangement = Arrangement.End,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Action(actionText = positiveBtnText) {
-                    this@CustomDialogFragment.dismiss()
-                    positiveBtnAction.invoke()
-                }
-                Action(actionText = negativeBtnText) {
+            if ("NA" != message) 24.dp.VerticalSpace()
+            Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End, verticalAlignment = Alignment.CenterVertically) {
+                AlertBtn(actionText = negativeBtnText) {
                     this@CustomDialogFragment.dismiss()
                     negativeBtnAction.invoke()
+                }
+                AlertBtn(actionText = positiveBtnText) {
+                    this@CustomDialogFragment.dismiss()
+                    positiveBtnAction.invoke()
                 }
             }
         }
