@@ -5,6 +5,7 @@ import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CutCornerShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
@@ -13,13 +14,13 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.fragment.app.FragmentTransaction
@@ -27,6 +28,7 @@ import com.google.accompanist.flowlayout.FlowRow
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.singularitycoder.testcomposestuff.ui.theme.AppColor
 import com.singularitycoder.testcomposestuff.ui.theme.ComposablesApp
+import com.singularitycoder.testcomposestuff.ui.theme.Ticket
 import com.singularitycoder.testcomposestuff.ui.utils.*
 
 class MainActivity : AppCompatActivity() {
@@ -79,7 +81,7 @@ class MainActivity : AppCompatActivity() {
                         style = MaterialTheme.typography.h4
                     )
 
-                    Page(title = "Alert Dialog", result = alertResult.value) {
+                    Board(title = "Alert Dialog", result = alertResult.value) {
                         FlowRow {
                             DefaultButton(actionText = "Simple Dialog") { showAlert.value = true }
                             if (showAlert.value) {
@@ -123,7 +125,7 @@ class MainActivity : AppCompatActivity() {
                         }
                     }
 
-                    Page(title = "Snackbar", result = snackbarResult.value) {
+                    Board(title = "Snackbar", result = snackbarResult.value) {
                         // Text
                         // With Action
                         // Action on new line
@@ -137,7 +139,7 @@ class MainActivity : AppCompatActivity() {
                                 snackbarResult.value = "Something happened"
                             }
                             DefaultButton(actionText = "Simple Snackbar") {
-                                Feedback(
+                                showFeedback(
                                     coroutineScope = coroutineScope,
                                     scaffoldState = scaffoldState,
                                     message = "Snackbar with action",
@@ -149,7 +151,7 @@ class MainActivity : AppCompatActivity() {
                                 )
                             }
                             DefaultButton(actionText = "Snackbar with Action") {
-                                Feedback(
+                                showFeedback(
                                     coroutineScope = coroutineScope,
                                     scaffoldState = scaffoldState,
                                     message = "Snackbar with action",
@@ -163,7 +165,7 @@ class MainActivity : AppCompatActivity() {
                         }
                     }
 
-                    Page(title = "Button", result = buttonResult.value) {
+                    Board(title = "Button", result = buttonResult.value) {
                         // Default Button
                         // Square Button
                         // Semi-Rounded Button
@@ -191,7 +193,7 @@ class MainActivity : AppCompatActivity() {
                         }
                     }
 
-                    Page(title = "Text") {
+                    Board(title = "Text") {
                         // Basic Text View
                         // Different font families
                         // Different font sizes - h1 to body
@@ -225,115 +227,146 @@ class MainActivity : AppCompatActivity() {
                         Text(text = "H1", style = MaterialTheme.typography.h1, modifier = Modifier.padding(top = 4.dp))
                     }
 
-                    Page(title = "Card") {
+                    Board(title = "Card") {
+                        @Composable
+                        fun Board(
+                            text: String,
+                            textPadding: Dp = 8.dp,
+                            elevation: Dp = 1.dp,
+                            shape: Shape = RoundedCornerShape(size = 4.dp),
+                            backgroundColor: Color = Color.White,
+                            border: BorderStroke? = null
+                        ) = Card(
+                            modifier = Modifier.padding(top = 8.dp, end = 8.dp),
+                            elevation = elevation,
+                            shape = shape,
+                            backgroundColor = backgroundColor,
+                            border = border
+                        ) { Text(text = text, modifier = Modifier.padding(textPadding)) }
+                        FlowRow {
+                            Board(text = "Basic Card")
+                            Board(text = "Elevated Card", elevation = 10.dp)
+                            Board(text = "Rounded Card\n\n\n\n", elevation = 4.dp, shape = RoundedCornerShape(size = 16.dp), textPadding = 16.dp)
+                            Board(text = "Cut Card\n\n\n\n", elevation = 4.dp, shape = CutCornerShape(size = 16.dp), textPadding = 16.dp)
+                            Board(text = "Colorful Card", backgroundColor = Color.Yellow)
+                            Board(text = "Bordered Card", border = BorderStroke(1.dp, color = AppColor.Purple500))
+                        }
+                    }
+
+                    Board(title = "Custom Shapes") {
+                        8.dp.VerticalSpace()
+                        Ticket(modifier = Modifier)
+                    }
+
+                    Board(title = "Animations") {
                         FlowRow {
 
                         }
                     }
 
-                    Page(title = "Floating Action Button") {
+                    Board(title = "Floating Action Button") {
                         FlowRow {
 
                         }
                     }
 
-                    Page(title = "Extended Floating Action Button") {
+                    Board(title = "Extended Floating Action Button") {
                         FlowRow {
 
                         }
                     }
 
-                    Page(title = "Scaffold") {
+                    Board(title = "Scaffold") {
                         FlowRow {
 
                         }
                     }
 
-                    Page(title = "Bottom Navigation Bar") {
+                    Board(title = "Bottom Navigation Bar") {
                         FlowRow {
 
                         }
                     }
 
-                    Page(title = "Top App Bar") {
+                    Board(title = "Top App Bar") {
                         FlowRow {
 
                         }
                     }
 
-                    Page(title = "Bottom Navigation Item") {
+                    Board(title = "Bottom Navigation Item") {
                         FlowRow {
 
                         }
                     }
 
-                    Page(title = "Backdrop Scaffold") {
+                    Board(title = "Backdrop Scaffold") {
                         FlowRow {
 
                         }
                     }
 
-                    Page(title = "Bottom App Bar") {
+                    Board(title = "Bottom App Bar") {
                         FlowRow {
 
                         }
                     }
 
-                    Page(title = "Progress") {
+                    Board(title = "Progress") {
                         FlowRow {
 
                         }
                     }
 
-                    Page(title = "Tab Row") {
+                    Board(title = "Tab Row") {
                         FlowRow {
 
                         }
                     }
 
-                    Page(title = "Tab") {
+                    Board(title = "Tab") {
                         FlowRow {
 
                         }
                     }
 
-                    Page(title = "Scrollable Tab Row") {
+                    Board(title = "Scrollable Tab Row") {
                         FlowRow {
 
                         }
                     }
 
-                    Page(title = "Divider") {
+                    Board(title = "Divider") {
                         FlowRow {
 
                         }
                     }
 
-                    Page(title = "Switch") {
+                    Board(title = "Switch") {
                         FlowRow {
 
                         }
                     }
 
-                    Page(title = "Checkbox") {
+                    Board(title = "Checkbox") {
                         FlowRow {
 
                         }
                     }
 
-                    Page(title = "Radio Button") {
+                    Board(title = "Radio Button") {
                         FlowRow {
 
                         }
                     }
 
-                    Page(title = "Slider") {
+                    Board(title = "Slider") {
                         FlowRow {
 
                         }
                     }
 
-                    Page(title = "Icon Button") {
+                    Board(title = "Icon Button") {
                         FlowRow {
 
                         }

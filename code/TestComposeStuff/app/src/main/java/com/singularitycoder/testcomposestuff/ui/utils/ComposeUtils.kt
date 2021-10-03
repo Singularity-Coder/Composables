@@ -5,9 +5,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Color.Companion.Transparent
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.text.font.FontWeight
@@ -20,7 +18,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 @Composable
-fun Page(title: String, result: String = "", stuff: @Composable ColumnScope.() -> Unit) {
+fun Board(title: String, result: String = "", stuff: @Composable ColumnScope.() -> Unit) {
     Card(
         elevation = 10.dp,
         modifier = Modifier.padding(start = 0.dp, top = 24.dp, end = 0.dp, bottom = 0.dp),
@@ -80,17 +78,16 @@ fun Feedback(
     btnAction: () -> Unit = {}
 ) = Snackbar(
     action = {
-        if ("NA" != btnText) {
-            TextButton(
-                colors = ButtonDefaults.buttonColors(
-                    backgroundColor = AppColor.Transparent,
-                    contentColor = AppColor.Purple200,
-                    disabledBackgroundColor = AppColor.Transparent,
-                    disabledContentColor = AppColor.Transparent
-                ),
-                onClick = { btnAction.invoke() }
-            ) { Text(btnText) }
-        }
+        if ("NA" == btnText) return@Snackbar
+        TextButton(
+            colors = ButtonDefaults.buttonColors(
+                backgroundColor = AppColor.Transparent,
+                contentColor = AppColor.Purple200,
+                disabledBackgroundColor = AppColor.Transparent,
+                disabledContentColor = AppColor.Transparent
+            ),
+            onClick = { btnAction.invoke() }
+        ) { Text(btnText) }
     },
     modifier = Modifier.padding(top = 8.dp),
     actionOnNewLine = actionOnNewLine,
@@ -98,7 +95,7 @@ fun Feedback(
 ) { Text(text = message) }
 
 // https://stackoverflow.com/questions/68909340/how-to-show-snackbar-with-a-button-onclick-in-jetpack-compose
-fun Feedback(
+fun showFeedback(
     coroutineScope: CoroutineScope,
     scaffoldState: ScaffoldState,
     message: String = "NA",
