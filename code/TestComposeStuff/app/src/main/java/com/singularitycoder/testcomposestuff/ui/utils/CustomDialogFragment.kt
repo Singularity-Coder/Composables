@@ -50,7 +50,11 @@ class CustomDialogFragment(
     @Composable
     fun CustomAlertDialog() {
         @Composable
-        fun Words(text: String, fontSize: TextUnit, fontWeight: FontWeight?) = Text(
+        fun Words(
+            text: String,
+            fontSize: TextUnit = 16.sp,
+            fontWeight: FontWeight? = FontWeight.Normal
+        ) = Text(
             text = text,
             fontSize = fontSize,
             fontWeight = fontWeight,
@@ -78,7 +82,7 @@ class CustomDialogFragment(
             if (image != android.R.drawable.ic_delete) 24.dp.VerticalSpace()
             if ("NA" != title) Words(text = title, fontSize = 18.sp, fontWeight = FontWeight.Bold)
             if ("NA" != title) 12.dp.VerticalSpace()
-            if ("NA" != message) Words(text = message, fontSize = 16.sp, fontWeight = FontWeight.Normal)
+            if ("NA" != message) Words(text = message)
             if ("NA" != message) 24.dp.VerticalSpace()
             Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End, verticalAlignment = Alignment.CenterVertically) {
                 AlertBtn(actionText = negativeBtnText) {

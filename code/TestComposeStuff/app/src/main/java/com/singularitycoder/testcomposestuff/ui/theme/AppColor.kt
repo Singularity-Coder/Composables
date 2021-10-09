@@ -18,4 +18,6 @@ object AppColor {
     val White = Color(0xFFFFFFFF)
     val TitleColor = Color(0xFF212121)
     val SubtitleColor = Color(0xFF616161)
+    val ErrorLight = Color(0xFFEF9A9A)
+    val ErrorDark = Color(0xFFB71C1C)
 }

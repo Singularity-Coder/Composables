@@ -10,6 +10,7 @@ import androidx.compose.ui.graphics.Color.Companion.Transparent
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -62,9 +63,7 @@ fun Result(result: String) = Text(
     text = result,
     color = AppColor.SubtitleColor,
     fontWeight = FontWeight.Normal,
-    modifier = Modifier
-        .fillMaxWidth()
-        .padding(top = 16.dp),
+    modifier = Modifier.fillMaxWidth().padding(top = 16.dp),
     style = MaterialTheme.typography.caption
 )
 
@@ -104,7 +103,7 @@ fun showFeedback(
     btnAction: () -> Unit = {},
     dismissAction: () -> Unit = {}
 ) {
-    // Queues snackbars. So if i click 100 times then I will see all 100 snacks over a period of time. This was handled well on XML MDC
+    // Queues snackbars. So if i click 100 times then I will see all 100 snacks over a period of time. This was handled well in XML Snackbar
     coroutineScope.launch {
         val snackbar = scaffoldState.snackbarHostState.showSnackbar(message = message, actionLabel = if ("NA" != btnText) btnText else null, duration = duration)
         when (snackbar) {
@@ -134,9 +133,11 @@ fun SimpleAlertDialog(
     @Composable
     fun Words(text: String, fontWeight: FontWeight) = Text(
         text = text,
+        maxLines = 8,
         fontSize = 18.sp,
         fontWeight = fontWeight,
         color = AppColor.LightBlack,
+        overflow = TextOverflow.Ellipsis,
         modifier = Modifier.fillMaxWidth()
     )
 
