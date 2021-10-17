@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -39,7 +41,7 @@ class CustomDialogFragment(
         return ComposeView(requireContext()).apply {
             setContent {
                 MaterialTheme {
-                    Surface(modifier = Modifier.padding(all = 24.dp), color = MaterialTheme.colors.background) {
+                    Surface(color = MaterialTheme.colors.background) {
                         CustomAlertDialog()
                     }
                 }
@@ -73,18 +75,24 @@ class CustomDialogFragment(
         ) { Text(actionText) }
 
         Column(modifier = Modifier.fillMaxWidth(), horizontalAlignment = Alignment.Start) {
-            if (image != android.R.drawable.ic_delete) Image(
-                painter = painterResource(id = image),
-                contentDescription = imgContentDesc,
-                modifier = Modifier.fillMaxWidth().height(160.dp),
-                contentScale = ContentScale.Crop
-            )
-            if (image != android.R.drawable.ic_delete) 24.dp.VerticalSpace()
-            if ("NA" != title) Words(text = title, fontSize = 18.sp, fontWeight = FontWeight.Bold)
-            if ("NA" != title) 12.dp.VerticalSpace()
-            if ("NA" != message) Words(text = message)
-            if ("NA" != message) 24.dp.VerticalSpace()
-            Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End, verticalAlignment = Alignment.CenterVertically) {
+            Column(modifier = Modifier.fillMaxWidth().padding(top = 24.dp, start = 24.dp, end = 24.dp), horizontalAlignment = Alignment.Start) {
+                if ("NA" != title) Words(text = title, fontSize = 18.sp, fontWeight = FontWeight.Bold)
+                if ("NA" != title) 12.dp.VerticalSpace()
+            }
+
+            Column(modifier = Modifier.verticalScroll(rememberScrollState()).padding(start = 24.dp, end = 24.dp)) {
+                if (image != android.R.drawable.ic_delete) Image(
+                    painter = painterResource(id = image),
+                    contentDescription = imgContentDesc,
+                    modifier = Modifier.fillMaxWidth().height(160.dp),
+                    contentScale = ContentScale.Crop
+                )
+                if (image != android.R.drawable.ic_delete) 16.dp.VerticalSpace()
+                if ("NA" != message) Words(text = message)
+                if ("NA" != message) 24.dp.VerticalSpace()
+            }
+
+            Row(modifier = Modifier.fillMaxWidth().padding(start = 8.dp, end = 8.dp, bottom = 8.dp), horizontalArrangement = Arrangement.End, verticalAlignment = Alignment.CenterVertically) {
                 AlertBtn(actionText = negativeBtnText) {
                     this@CustomDialogFragment.dismiss()
                     negativeBtnAction.invoke()

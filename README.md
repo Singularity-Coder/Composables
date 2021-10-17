@@ -63,3 +63,5 @@ fun ComposeChangeViewBackground() {
 * https://developer.android.com/courses/pathways/compose
 * https://compose.academy/
 * https://stackoverflow.com/questions/59368360/how-to-use-compose-inside-fragment
+* https://webneel.com/best-panoramic-photography
+* https://github.com/Gurupreet/ComposeCookBook

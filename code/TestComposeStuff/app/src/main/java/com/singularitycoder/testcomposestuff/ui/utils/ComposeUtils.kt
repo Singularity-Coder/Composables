@@ -1,6 +1,7 @@
 package com.singularitycoder.testcomposestuff.ui.utils
 
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
@@ -14,12 +15,21 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.singularitycoder.testcomposestuff.ui.theme.AppColor
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 @Composable
-fun Board(title: String, result: String = "", stuff: @Composable ColumnScope.() -> Unit) {
+fun SetStatusBarColor() {
+    // https://stackoverflow.com/questions/65610216/how-to-change-statusbar-color-in-jetpack-compose
+    val systemUiController = rememberSystemUiController()
+    if (isSystemInDarkTheme()) systemUiController.setSystemBarsColor(color = AppColor.Transparent)
+    else systemUiController.setSystemBarsColor(color = AppColor.Purple700)
+}
+
+@Composable
+fun Board(title: String, result: String = "", titleBottomPadding: Boolean = true, stuff: @Composable ColumnScope.() -> Unit) {
     Card(
         elevation = 10.dp,
         modifier = Modifier.padding(start = 0.dp, top = 24.dp, end = 0.dp, bottom = 0.dp),
@@ -27,6 +37,7 @@ fun Board(title: String, result: String = "", stuff: @Composable ColumnScope.() 
     ) {
         Column(modifier = Modifier.padding(all = 16.dp)) {
             Words(text = title)
+            if (titleBottomPadding) 8.dp.VerticalSpace()
             stuff.invoke(this)
             if (!result.isNullOrBlankOrNaOrNullString()) Result(result = "Result: \n$result")
         }
@@ -92,26 +103,6 @@ fun Feedback(
     actionOnNewLine = actionOnNewLine,
     shape = shape
 ) { Text(text = message) }
-
-// https://stackoverflow.com/questions/68909340/how-to-show-snackbar-with-a-button-onclick-in-jetpack-compose
-fun showFeedback(
-    coroutineScope: CoroutineScope,
-    scaffoldState: ScaffoldState,
-    message: String = "NA",
-    btnText: String = "NA",
-    duration: SnackbarDuration = SnackbarDuration.Short,
-    btnAction: () -> Unit = {},
-    dismissAction: () -> Unit = {}
-) {
-    // Queues snackbars. So if i click 100 times then I will see all 100 snacks over a period of time. This was handled well in XML Snackbar
-    coroutineScope.launch {
-        val snackbar = scaffoldState.snackbarHostState.showSnackbar(message = message, actionLabel = if ("NA" != btnText) btnText else null, duration = duration)
-        when (snackbar) {
-            SnackbarResult.ActionPerformed -> btnAction.invoke()
-            SnackbarResult.Dismissed -> dismissAction.invoke()
-        }
-    }
-}
 
 @Composable
 fun Dp.HorizontalSpace() = Spacer(modifier = Modifier.width(this))
