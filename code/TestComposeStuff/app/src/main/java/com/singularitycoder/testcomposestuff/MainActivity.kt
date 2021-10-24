@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
@@ -14,29 +13,31 @@ import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.filled.Share
+import androidx.compose.material.icons.outlined.Star
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.fragment.app.FragmentTransaction
 import com.google.accompanist.flowlayout.FlowRow
 import com.singularitycoder.testcomposestuff.ui.composewidgets.*
 import com.singularitycoder.testcomposestuff.ui.theme.AppColor
 import com.singularitycoder.testcomposestuff.ui.theme.ComposablesApp
-import com.singularitycoder.testcomposestuff.ui.utils.Board
+import com.singularitycoder.testcomposestuff.ui.utils.*
 import com.singularitycoder.testcomposestuff.ui.utils.Composables.*
-import com.singularitycoder.testcomposestuff.ui.utils.HorizontalSpace
-import com.singularitycoder.testcomposestuff.ui.utils.SetStatusBarColor
-import com.singularitycoder.testcomposestuff.ui.utils.VerticalSpace
 import kotlinx.coroutines.launch
 
 /**
@@ -128,12 +129,28 @@ class MainActivity : AppCompatActivity() {
                     ComposeRadioButtons()
                     ComposeMenus()
                     ComposeProgressBars()
+                    ComposeTopAppBars()
+                    ComposeBottomAppBars()
+                    ComposeBottomNavigationBars()
 
                     Board(title = VERTICAL_LIST.value) {
                         // Shimmer Layout
                         // Vertical List View with Search
                         // Horizontal List View with Search
                         // Grid List View with Search
+
+                        val VERTICAL_LIST_FRAGMENT = "VERTICAL_LIST_FRAGMENT"
+                        val context = LocalContext.current
+                        DefaultButton(actionText = "Vertical List Dialog Fragment") {
+                            val fragmentTransaction = context.getActivity()?.supportFragmentManager?.beginTransaction().apply {
+                                this?.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                                val previousFragment = context.getActivity()?.supportFragmentManager?.findFragmentByTag(VERTICAL_LIST_FRAGMENT)
+                                if (null != previousFragment) this?.remove(previousFragment)
+                                this?.addToBackStack(null)
+                            }
+                            fragmentTransaction ?: return@DefaultButton
+                            VerticalListDialogFragment().show(fragmentTransaction, VERTICAL_LIST_FRAGMENT)
+                        }
 
 //                        val list = listOf("A", "B", "C", "D") + ((0..100).map { it.toString() })
 //                        LazyColumn(modifier = Modifier.fillMaxHeight()) {
@@ -164,6 +181,19 @@ class MainActivity : AppCompatActivity() {
 //                                }
 //                            })
 //                        }
+
+                        val HOROZONTAL_LIST_FRAGMENT = "HOROZONTAL_LIST_FRAGMENT"
+                        val context = LocalContext.current
+                        DefaultButton(actionText = "Horizontal List Dialog Fragment") {
+                            val fragmentTransaction = context.getActivity()?.supportFragmentManager?.beginTransaction().apply {
+                                this?.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                                val previousFragment = context.getActivity()?.supportFragmentManager?.findFragmentByTag(HOROZONTAL_LIST_FRAGMENT)
+                                if (null != previousFragment) this?.remove(previousFragment)
+                                this?.addToBackStack(null)
+                            }
+                            fragmentTransaction ?: return@DefaultButton
+                            HorizontalListDialogFragment().show(fragmentTransaction, HOROZONTAL_LIST_FRAGMENT)
+                        }
                     }
 
                     Board(title = VERTICAL_GRID_LIST.value) {
@@ -288,37 +318,6 @@ class MainActivity : AppCompatActivity() {
                                 topLeft = Offset(60f, 60f)
                             )
                         }
-                    }
-
-                    Board(title = BOTTOM_NAVIGATION_BAR.value) {
-                        FlowRow {
-
-                        }
-                    }
-
-                    Board(title = BOTTOM_APP_BAR.value) {
-                        FlowRow {
-
-                        }
-                    }
-
-                    Board(title = TOP_APP_BAR.value) {
-                        TopAppBar(
-                            elevation = 4.dp,
-                            title = { Text("TopAppBar") },
-                            backgroundColor = MaterialTheme.colors.primarySurface,
-                            navigationIcon = {
-                                IconButton(onClick = { /* Do Something */ }) {
-                                    Icon(Icons.Filled.ArrowBack, null)
-                                }
-                            }, actions = {
-                                IconButton(onClick = { /* Do Something */ }) {
-                                    Icon(Icons.Filled.Share, null)
-                                }
-                                IconButton(onClick = { /* Do Something */ }) {
-                                    Icon(Icons.Filled.Settings, null)
-                                }
-                            })
                     }
 
                     Board(title = BACKDROP_SCAFFOLD.value) {

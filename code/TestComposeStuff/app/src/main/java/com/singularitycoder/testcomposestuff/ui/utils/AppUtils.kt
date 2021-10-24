@@ -2,6 +2,7 @@ package com.singularitycoder.testcomposestuff.ui.utils
 
 import android.content.Context
 import android.content.ContextWrapper
+import androidx.annotation.DrawableRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.material.ScaffoldState
 import androidx.compose.material.SnackbarDuration
@@ -18,11 +19,117 @@ import com.singularitycoder.testcomposestuff.R
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import java.util.*
+import kotlin.collections.ArrayList
 
 val hobbyList = listOf("Meditation", "Yoga", "Computer Programming", "Hacking", "3D Animation", "Story Telling", "Graphic Design", "Inventing")
 val menuList = listOf("Preview", "Share", "Get Link")
 val bombList = listOf("RDS-220", "B41", "TX-21")
-val menuIconList = listOf(R.drawable.ic_baseline_visibility_24, R.drawable.ic_baseline_person_add_24, R.drawable.ic_baseline_link_24)
+val menuIconList = listOf(
+    R.drawable.ic_baseline_visibility_24,
+    R.drawable.ic_baseline_person_add_24,
+    R.drawable.ic_baseline_link_24
+)
+val natureImageList = listOf(
+    R.drawable.p1,
+    R.drawable.p2,
+    R.drawable.p3,
+    R.drawable.p4,
+    R.drawable.p5,
+    R.drawable.p6,
+    R.drawable.p7,
+    R.drawable.p8,
+    R.drawable.p9,
+    R.drawable.p10,
+    R.drawable.p11,
+    R.drawable.p12,
+    R.drawable.p13,
+    R.drawable.p14,
+    R.drawable.p15,
+    R.drawable.p16,
+    R.drawable.p17,
+    R.drawable.p18,
+    R.drawable.p19,
+    R.drawable.p20,
+    R.drawable.p21,
+    R.drawable.p22,
+    R.drawable.p23,
+    R.drawable.p24,
+    R.drawable.p25,
+    R.drawable.p26,
+)
+val animeImageList = listOf(
+    R.drawable.ani1,
+    R.drawable.ani2,
+    R.drawable.ani3,
+    R.drawable.ani4,
+    R.drawable.ani5,
+    R.drawable.ani6,
+    R.drawable.ani7,
+    R.drawable.ani8,
+    R.drawable.ani9,
+    R.drawable.ani10,
+    R.drawable.ani11,
+    R.drawable.ani12,
+    R.drawable.ani13,
+    R.drawable.ani14,
+    R.drawable.ani15,
+    R.drawable.ani16,
+    R.drawable.ani17,
+    R.drawable.ani18,
+    R.drawable.ani19,
+    R.drawable.ani20,
+    R.drawable.ani21,
+    R.drawable.ani22,
+    R.drawable.ani23,
+    R.drawable.ani24,
+    R.drawable.ani25,
+    R.drawable.ani26,
+    R.drawable.ani27,
+    R.drawable.ani28,
+    R.drawable.ani29,
+    R.drawable.ani30,
+    R.drawable.ani31,
+    R.drawable.ani32,
+    R.drawable.ani33,
+    R.drawable.ani34,
+    R.drawable.ani35,
+    R.drawable.ani36,
+    R.drawable.ani37,
+    R.drawable.ani38,
+    R.drawable.ani39
+)
+
+fun getNatureItemList(): List<Item> {
+    val itemList = ArrayList<Item>()
+    natureImageList.forEachIndexed { index, image ->
+        itemList.add(
+            Item(
+                id = index + 1,
+                title = "The beauty of nature ${index + 1}",
+                subtitle = "I felt my lungs inflate with the onrush of scenery—air, mountains, trees, people.",
+                author = "Person ${index + 1}",
+                imageId = image
+            )
+        )
+    }
+    return itemList
+}
+
+fun getAnimeItemList(): List<Item> {
+    val itemList = ArrayList<Item>()
+    animeImageList.forEachIndexed { index, image ->
+        itemList.add(
+            Item(
+                id = index + 1,
+                title = "Anime ${index + 1}",
+                subtitle = "A good anime has certain qualities that make it unique, whether it be a different plot point, characters, fight scenes, romance etc.",
+                author = "Person ${index + 1}",
+                imageId = image
+            )
+        )
+    }
+    return itemList
+}
 
 // https://stackoverflow.com/questions/68909340/how-to-show-snackbar-with-a-button-onclick-in-jetpack-compose
 fun showFeedback(
@@ -81,6 +188,15 @@ class CustomShape : Shape {
     }
 }
 
+data class Item(
+    val id: Int,
+    val title: String,
+    val subtitle: String,
+    @DrawableRes val imageId: Int,
+    val author: String,
+    val source: String = "Local Source"
+)
+
 enum class MyColors(val color: Color) {
     RED(Color.Red), GREEN(Color.Green), BLUE(Color.Blue)
 }
@@ -100,6 +216,9 @@ enum class Composables(val value: String) {
     ANIMATIONS(value = "Animations"),
     MENU(value = "Menu"),
     PROGRESS_BARS(value = "Progress Bars"),
+    TOP_APP_BAR(value = "Top App Bar"),
+    BOTTOM_APP_BAR(value = "Bottom App Bar"),
+    BOTTOM_NAVIGATION_BAR(value = "Bottom Navigation Bar"),
     SWITCH(value = "Switch"),
     CHECKBOX(value = "Checkbox"),
     RADIO_BUTTON(value = "Radio Button"),
@@ -110,9 +229,6 @@ enum class Composables(val value: String) {
     FLOATING_ACTION_BUTTON(value = "Floating Action Button"),
     EXTENDED_FLOATING_ACTION_BUTTON(value = "Extended Floating Action Button"),
     CANVAS(value = "Canvas"),
-    BOTTOM_NAVIGATION_BAR(value = "Bottom Navigation Bar"),
-    BOTTOM_APP_BAR(value = "Bottom App Bar"),
-    TOP_APP_BAR(value = "Top App Bar"),
     BACKDROP_SCAFFOLD(value = "Backdrop Scaffold"),
     TAB_ROW(value = "Tab Row"),
     TAB(value = "Tab"),

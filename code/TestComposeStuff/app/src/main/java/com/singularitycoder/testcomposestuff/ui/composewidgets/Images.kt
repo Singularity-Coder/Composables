@@ -1,12 +1,12 @@
 package com.singularitycoder.testcomposestuff.ui.composewidgets
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.CutCornerShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Card
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -14,9 +14,15 @@ import androidx.compose.ui.graphics.BlendMode
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import coil.annotation.ExperimentalCoilApi
+import coil.compose.rememberImagePainter
+import coil.request.ImageRequest
+import coil.transform.CircleCropTransformation
 import com.singularitycoder.testcomposestuff.R
 import com.singularitycoder.testcomposestuff.ui.theme.ComposablesApp
 import com.singularitycoder.testcomposestuff.ui.utils.Board
@@ -39,23 +45,30 @@ fun ComposeImages() {
         Image(painter = painterResource(id = R.drawable.pic1), contentDescription = null, modifier = Modifier.clip(CircleShape).height(64.dp).width(64.dp))
         8.dp.VerticalSpace()
         Image(painter = painterResource(id = R.drawable.pan4), contentDescription = null)
-        Image(painter = painterResource(id = R.drawable.pan4), contentDescription = null, colorFilter = ColorFilter.tint(Color.Magenta, BlendMode.ColorDodge))
-        Image(painter = painterResource(id = R.drawable.pan4), contentDescription = null, colorFilter = ColorFilter.tint(Color.Magenta, BlendMode.ColorBurn))
-        Image(painter = painterResource(id = R.drawable.pan4), contentDescription = null, colorFilter = ColorFilter.tint(Color.Magenta, BlendMode.Color))
         Image(painter = painterResource(id = R.drawable.pan4), contentDescription = null, colorFilter = ColorFilter.tint(Color.Magenta, BlendMode.Darken))
-        Image(painter = painterResource(id = R.drawable.pan4), contentDescription = null, colorFilter = ColorFilter.tint(Color.Magenta, BlendMode.Difference))
         Image(painter = painterResource(id = R.drawable.pan4), contentDescription = null, colorFilter = ColorFilter.tint(Color.Magenta, BlendMode.Lighten))
-        Image(painter = painterResource(id = R.drawable.pan4), contentDescription = null, colorFilter = ColorFilter.tint(Color.Magenta, BlendMode.Luminosity))
-        Image(painter = painterResource(id = R.drawable.pan4), contentDescription = null, colorFilter = ColorFilter.tint(Color.Magenta, BlendMode.Multiply))
         Image(painter = painterResource(id = R.drawable.pan4), contentDescription = null, colorFilter = ColorFilter.tint(Color.Magenta, BlendMode.Overlay))
-        Image(painter = painterResource(id = R.drawable.pan4), contentDescription = null, colorFilter = ColorFilter.tint(Color.Magenta, BlendMode.Saturation))
-        Image(painter = painterResource(id = R.drawable.pan4), contentDescription = null, colorFilter = ColorFilter.tint(Color.Magenta, BlendMode.Screen))
-        Image(painter = painterResource(id = R.drawable.pan4), contentDescription = null, colorFilter = ColorFilter.tint(Color.Magenta, BlendMode.Softlight))
         8.dp.VerticalSpace()
         Image(painter = painterResource(id = R.drawable.pan6), contentDescription = null)
         Image(painter = painterResource(id = R.drawable.pan6), contentDescription = null, colorFilter = ColorFilter.lighting(Color.Yellow, Color.Blue))
         Image(painter = painterResource(id = R.drawable.pan6), contentDescription = null, colorFilter = ColorFilter.lighting(Color.Green, Color.Red))
         Image(painter = painterResource(id = R.drawable.pan6), contentDescription = null, colorFilter = ColorFilter.lighting(Color.Green, Color.Black))
+        8.dp.VerticalSpace()
+
+        // https://coil-kt.github.io/coil/compose/
+        Image(
+            painter = rememberImagePainter(
+                data = "https://cdn.pixabay.com/photo/2020/05/12/11/39/cat-5162540_1280.jpg",
+                builder = {
+                    crossfade(true)
+                    placeholder(R.drawable.ic_launcher_background)
+                    transformations(CircleCropTransformation())
+                }
+            ),
+            contentDescription = null,
+            modifier = Modifier.size(80.dp),
+            contentScale = ContentScale.Crop
+        )
     }
 }
 

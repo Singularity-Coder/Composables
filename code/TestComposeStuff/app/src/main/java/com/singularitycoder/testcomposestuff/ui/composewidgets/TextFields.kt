@@ -53,6 +53,7 @@ fun ComposeTextFields() {
                 basicTextFieldText.value = it
             }
         )
+
         OutlinedTextField(
             modifier = Modifier.fillMaxWidth(),
             value = "",
@@ -61,7 +62,9 @@ fun ComposeTextFields() {
             label = { Text("Read Only Text Field") },
             colors = TextFieldDefaults.textFieldColors(disabledIndicatorColor = Color.LightGray)
         )
+
         8.dp.VerticalSpace()
+
         TextField(
             modifier = Modifier.fillMaxWidth(),
             value = textFieldText.value,
@@ -71,6 +74,7 @@ fun ComposeTextFields() {
             },
             label = { Text("Enter Name") }
         )
+
         OutlinedTextField(
             modifier = Modifier.fillMaxWidth(),
             value = outlinedTextFieldText.value,
@@ -80,7 +84,9 @@ fun ComposeTextFields() {
             },
             label = { Text("Enter Name") }
         )
+
         8.dp.VerticalSpace()
+
         val passwordVisibility = remember { mutableStateOf(false) }
         TextField(
             modifier = Modifier.fillMaxWidth(),

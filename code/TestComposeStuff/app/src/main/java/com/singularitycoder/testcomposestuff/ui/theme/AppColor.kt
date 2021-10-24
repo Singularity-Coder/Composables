@@ -18,10 +18,15 @@ object AppColor {
     val Teal700 = Color(0xFF0097A7)
     val Teal900 = Color(0xFF006064)
     val LightBlack = Color(0xFF4A4A4A)
+    val NatureGreen500 = Color(0xFF8BC34A)
+    val DarkOrange900 = Color(0xFFE65100)
     val Black = Color(0xFF000000)
     val White = Color(0xFFFFFFFF)
     val TitleColor = Color(0xFF212121)
     val SubtitleColor = Color(0xFF616161)
     val ErrorLight = Color(0xFFEF9A9A)
     val ErrorDark = Color(0xFFB71C1C)
+    val TwitterColor = Color(0xFF1DA1F2)
+
+    val GradientTealPurple200 = listOf(Teal200, Purple200)
 }
