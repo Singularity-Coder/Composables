@@ -9,22 +9,14 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.icons.filled.Settings
-import androidx.compose.material.icons.filled.Share
-import androidx.compose.material.icons.outlined.Star
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
@@ -34,7 +26,7 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.fragment.app.FragmentTransaction
 import com.google.accompanist.flowlayout.FlowRow
 import com.singularitycoder.testcomposestuff.ui.composewidgets.*
-import com.singularitycoder.testcomposestuff.ui.theme.AppColor
+import com.singularitycoder.testcomposestuff.ui.theme.ComposeColor
 import com.singularitycoder.testcomposestuff.ui.theme.ComposablesApp
 import com.singularitycoder.testcomposestuff.ui.utils.*
 import com.singularitycoder.testcomposestuff.ui.utils.Composables.*
@@ -87,11 +79,13 @@ import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
+    @ExperimentalFoundationApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent { ComposablesApp { Surface(color = MaterialTheme.colors.background) { UI() } } }
     }
 
+    @ExperimentalFoundationApi
     @Composable
     private fun UI() {
         val scaffoldState = rememberScaffoldState() // You cannot reference directly composables in a non-compose location but you can refer their instances
@@ -103,12 +97,12 @@ class MainActivity : AppCompatActivity() {
         SetStatusBarColor()
 
         Scaffold(scaffoldState = scaffoldState) {
-            Column(modifier = Modifier.fillMaxSize().background(color = AppColor.Purple700)) {
+            Column(modifier = Modifier.fillMaxSize().background(color = ComposeColor.Purple700)) {
                 Column(modifier = Modifier.verticalScroll(rememberScrollState()).padding(start = 24.dp, end = 24.dp)) {
 
                     Text(
                         text = "Composables",
-                        color = AppColor.White,
+                        color = ComposeColor.White,
                         fontWeight = FontWeight.Black,
                         modifier = Modifier.fillMaxWidth().padding(top = 24.dp),
                         textDecoration = TextDecoration.None,
@@ -132,124 +126,9 @@ class MainActivity : AppCompatActivity() {
                     ComposeTopAppBars()
                     ComposeBottomAppBars()
                     ComposeBottomNavigationBars()
-
-                    Board(title = VERTICAL_LIST.value) {
-                        // Shimmer Layout
-                        // Vertical List View with Search
-                        // Horizontal List View with Search
-                        // Grid List View with Search
-
-                        val VERTICAL_LIST_FRAGMENT = "VERTICAL_LIST_FRAGMENT"
-                        val context = LocalContext.current
-                        DefaultButton(actionText = "Vertical List Dialog Fragment") {
-                            val fragmentTransaction = context.getActivity()?.supportFragmentManager?.beginTransaction().apply {
-                                this?.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                                val previousFragment = context.getActivity()?.supportFragmentManager?.findFragmentByTag(VERTICAL_LIST_FRAGMENT)
-                                if (null != previousFragment) this?.remove(previousFragment)
-                                this?.addToBackStack(null)
-                            }
-                            fragmentTransaction ?: return@DefaultButton
-                            VerticalListDialogFragment().show(fragmentTransaction, VERTICAL_LIST_FRAGMENT)
-                        }
-
-//                        val list = listOf("A", "B", "C", "D") + ((0..100).map { it.toString() })
-//                        LazyColumn(modifier = Modifier.fillMaxHeight()) {
-//                            items(items = list, itemContent = { item ->
-//                                Log.d("COMPOSE", "This get rendered $item")
-//                                when (item) {
-//                                    "A" -> Text(text = item, style = TextStyle(fontSize = 80.sp))
-//                                    "B" -> Button(onClick = {}) { Text(text = item, style = TextStyle(fontSize = 80.sp)) }
-//                                    "C" -> Unit
-//                                    "D" -> Text(text = item)
-//                                    else -> Text(text = item, style = TextStyle(fontSize = 80.sp))
-//                                }
-//                            })
-//                        }
-                    }
-
-                    Board(title = HORIZONTAL_LIST.value) {
-//                        val list = listOf("A", "B", "C", "D") + ((0..100).map { it.toString() })
-//                        LazyRow(modifier = Modifier.fillMaxHeight()) {
-//                            items(items = list, itemContent = { item ->
-//                                Log.d("COMPOSE", "This get rendered $item")
-//                                when (item) {
-//                                    "A" -> Text(text = item, style = TextStyle(fontSize = 80.sp))
-//                                    "B" -> Button(onClick = {}) { Text(text = item, style = TextStyle(fontSize = 80.sp)) }
-//                                    "C" -> Unit
-//                                    "D" -> Text(text = item)
-//                                    else -> Text(text = item, style = TextStyle(fontSize = 80.sp))
-//                                }
-//                            })
-//                        }
-
-                        val HOROZONTAL_LIST_FRAGMENT = "HOROZONTAL_LIST_FRAGMENT"
-                        val context = LocalContext.current
-                        DefaultButton(actionText = "Horizontal List Dialog Fragment") {
-                            val fragmentTransaction = context.getActivity()?.supportFragmentManager?.beginTransaction().apply {
-                                this?.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                                val previousFragment = context.getActivity()?.supportFragmentManager?.findFragmentByTag(HOROZONTAL_LIST_FRAGMENT)
-                                if (null != previousFragment) this?.remove(previousFragment)
-                                this?.addToBackStack(null)
-                            }
-                            fragmentTransaction ?: return@DefaultButton
-                            HorizontalListDialogFragment().show(fragmentTransaction, HOROZONTAL_LIST_FRAGMENT)
-                        }
-                    }
-
-                    Board(title = VERTICAL_GRID_LIST.value) {
-//                        @ExperimentalFoundationApi
-//                        @Composable
-//                        fun GridList() {
-//                            val list = (1..10).map { it.toString() }
-//                            LazyVerticalGrid(
-//                                cells = GridCells.Adaptive(128.dp),
-//                                contentPadding = PaddingValues(start = 12.dp, top = 16.dp, end = 12.dp, bottom = 16.dp),
-//                                content = {
-//                                    items(list.size) { index ->
-//                                        Card(backgroundColor = Color.Red, modifier = Modifier.padding(4.dp).fillMaxWidth(), elevation = 8.dp) {
-//                                            Text(text = list[index], color = Color(0xFFFFFFFF), modifier = Modifier.padding(16.dp))
-//                                        }
-//                                    }
-//                                }
-//                            )
-//                        }
-                    }
-
-                    Board(title = GESTURES.value) {
-                        // Long Press
-                        // Double Tap
-                        // Tap
-                        // Drag
-                        FlowRow {
-
-                        }
-                    }
-
-                    Board(title = ANIMATIONS.value) {
-                        // Single Value Animation
-                        // Crossfade animation
-                        // Snap Animations
-                        // Tween Animations
-                        // Vector animations
-                        // Animated Values
-                        // Spring Animations
-
-//                        val currentColor = remember { mutableStateOf(Color.Red) }
-//                        Row {
-//                            MyColors.values().forEach { myColor ->
-//                                Button(
-//                                    onClick = { currentColor.value = myColor.color },
-//                                    modifier = Modifier
-//                                        .weight(1f, true)
-//                                        .height(48.dp)
-//                                        .background(myColor.color), colors = ButtonDefaults.buttonColors(backgroundColor = myColor.color)
-//                                ) { Text(myColor.name) }
-//                            }
-//                        }
-//                        Crossfade(targetState = currentColor.value, animationSpec = tween(3000)) { selectedColor ->
-//                            Box(modifier = Modifier.fillMaxSize().background(selectedColor.value, shape = RectangleShape))
-//                        }
-                    }
+                    ComposeVerticalLists()
+                    ComposeHorizontalLists()
+                    ComposeVerticalGridLists()
 
                     Board(title = SWITCH.value, result = switchResult.value) {
                         val checkedState = remember { mutableStateOf(true) }
@@ -318,6 +197,42 @@ class MainActivity : AppCompatActivity() {
                                 topLeft = Offset(60f, 60f)
                             )
                         }
+                    }
+
+                    Board(title = GESTURES.value) {
+                        // Long Press
+                        // Double Tap
+                        // Tap
+                        // Drag
+                        FlowRow {
+
+                        }
+                    }
+
+                    Board(title = ANIMATIONS.value) {
+                        // Single Value Animation
+                        // Crossfade animation
+                        // Snap Animations
+                        // Tween Animations
+                        // Vector animations
+                        // Animated Values
+                        // Spring Animations
+
+//                        val currentColor = remember { mutableStateOf(Color.Red) }
+//                        Row {
+//                            MyColors.values().forEach { myColor ->
+//                                Button(
+//                                    onClick = { currentColor.value = myColor.color },
+//                                    modifier = Modifier
+//                                        .weight(1f, true)
+//                                        .height(48.dp)
+//                                        .background(myColor.color), colors = ButtonDefaults.buttonColors(backgroundColor = myColor.color)
+//                                ) { Text(myColor.name) }
+//                            }
+//                        }
+//                        Crossfade(targetState = currentColor.value, animationSpec = tween(3000)) { selectedColor ->
+//                            Box(modifier = Modifier.fillMaxSize().background(selectedColor.value, shape = RectangleShape))
+//                        }
                     }
 
                     Board(title = BACKDROP_SCAFFOLD.value) {
@@ -531,7 +446,7 @@ class MainActivity : AppCompatActivity() {
                         }
                     }
 
-                    Board(title = "Misc") {
+                    Board(title = "Misc", shouldShow = false) {
                         @Composable
                         fun CompositionLocal() {
                             val localActiveUser = compositionLocalOf<String> { error("No user found!") }

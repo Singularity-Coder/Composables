@@ -2,7 +2,7 @@ package com.singularitycoder.testcomposestuff.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-object AppColor {
+object ComposeColor {
     val Transparent = Color(0x00000000)
     val Purple50 = Color(0xFFF3E5F5)
     val Purple100 = Color(0xFFB39DDB)
@@ -29,4 +29,8 @@ object AppColor {
     val TwitterColor = Color(0xFF1DA1F2)
 
     val GradientTealPurple200 = listOf(Teal200, Purple200)
+}
+
+object AndroidColor {
+    val purple700 = "#3700B3"
 }

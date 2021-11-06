@@ -23,7 +23,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.singularitycoder.testcomposestuff.R
-import com.singularitycoder.testcomposestuff.ui.theme.AppColor
+import com.singularitycoder.testcomposestuff.ui.theme.ComposeColor
 import com.singularitycoder.testcomposestuff.ui.theme.ComposablesApp
 import com.singularitycoder.testcomposestuff.ui.utils.Board
 import com.singularitycoder.testcomposestuff.ui.utils.Composables
@@ -34,8 +34,6 @@ import com.singularitycoder.testcomposestuff.ui.utils.VerticalSpace
 fun ComposeTextFields() {
     val textFieldResult = remember { mutableStateOf("") }
     Board(title = Composables.TEXT_FIELDS.value, result = textFieldResult.value) {
-        // Error Field
-        // Trialing & ErrorIcon
         // Long Description field
         // Default close icon func
         // IME options, Keyboard Type, Input State, Visual Transformation, Password Field, Handle value changes, Default value, text field value
@@ -102,7 +100,7 @@ fun ComposeTextFields() {
             maxLines = 1,
             visualTransformation = if (passwordVisibility.value) VisualTransformation.None else PasswordVisualTransformation(),
             keyboardOptions = KeyboardOptions(autoCorrect = false, keyboardType = KeyboardType.Password),
-            label = { Text(text = "Enter Password", color = if (customTextFieldText.value.length > 10) AppColor.ErrorDark else AppColor.Purple700) },
+            label = { Text(text = "Enter Password", color = if (customTextFieldText.value.length > 10) ComposeColor.ErrorDark else ComposeColor.Purple700) },
             leadingIcon = {
                 IconButton(onClick = { /*TODO*/ }) {
                     Icon(painter = painterResource(id = R.drawable.ic_outline_lock_24), contentDescription = "Password Placeholder Image")
@@ -113,7 +111,7 @@ fun ComposeTextFields() {
                     Icon(
                         painter = painterResource(id = R.drawable.ic_baseline_error_24),
                         contentDescription = "Warning",
-                        tint = AppColor.ErrorDark,
+                        tint = ComposeColor.ErrorDark,
                         modifier = Modifier.clickable { showScopedSnackbar.value = true }
                     )
                 } else {
@@ -121,17 +119,17 @@ fun ComposeTextFields() {
                         painterResource(id = R.drawable.ic_baseline_visibility_off_24)
                     } else painterResource(id = R.drawable.ic_baseline_visibility_24)
                     IconButton(onClick = { passwordVisibility.value = !passwordVisibility.value }) {
-                        Icon(painter = image, "Trailing Icon", tint = AppColor.Purple500)
+                        Icon(painter = image, "Trailing Icon", tint = ComposeColor.Purple500)
                     }
                 }
             },
             colors = TextFieldDefaults.textFieldColors(
-                textColor = AppColor.TitleColor,
-                backgroundColor = if (customTextFieldText.value.length > 10) AppColor.ErrorLight else AppColor.Purple100,
-                focusedIndicatorColor = if (customTextFieldText.value.length > 10) AppColor.ErrorDark else AppColor.Purple700,
-                unfocusedIndicatorColor = AppColor.Purple700,
-                disabledIndicatorColor = AppColor.Purple200,
-                errorIndicatorColor = AppColor.ErrorDark
+                textColor = ComposeColor.TitleColor,
+                backgroundColor = if (customTextFieldText.value.length > 10) ComposeColor.ErrorLight else ComposeColor.Purple100,
+                focusedIndicatorColor = if (customTextFieldText.value.length > 10) ComposeColor.ErrorDark else ComposeColor.Purple700,
+                unfocusedIndicatorColor = ComposeColor.Purple700,
+                disabledIndicatorColor = ComposeColor.Purple200,
+                errorIndicatorColor = ComposeColor.ErrorDark
             )
         )
         Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
@@ -140,7 +138,7 @@ fun ComposeTextFields() {
                 Text(
                     text = text,
                     fontSize = 12.sp,
-                    color = if (customTextFieldText.value.length > 10) AppColor.ErrorDark else Color.Gray,
+                    color = if (customTextFieldText.value.length > 10) ComposeColor.ErrorDark else Color.Gray,
                     overflow = TextOverflow.Ellipsis,
                     maxLines = 1,
                     modifier = modifier,

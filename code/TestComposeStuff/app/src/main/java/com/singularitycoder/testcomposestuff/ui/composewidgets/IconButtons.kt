@@ -11,7 +11,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.google.accompanist.flowlayout.FlowRow
 import com.singularitycoder.testcomposestuff.R
-import com.singularitycoder.testcomposestuff.ui.theme.AppColor
+import com.singularitycoder.testcomposestuff.ui.theme.ComposeColor
 import com.singularitycoder.testcomposestuff.ui.theme.ComposablesApp
 import com.singularitycoder.testcomposestuff.ui.utils.Board
 import com.singularitycoder.testcomposestuff.ui.utils.Composables
@@ -23,7 +23,7 @@ fun ComposeIconButtons() {
     Board(title = Composables.ICON_BUTTON.value, result = iconBtnResult.value) {
         FlowRow {
             IconButton(onClick = { iconBtnResult.value = "You poked the eye! Arrrrrrrrgh..." }) {
-                Icon(painter = painterResource(id = R.drawable.ic_baseline_visibility_24), "Basic Icon Button", tint = AppColor.Purple500)
+                Icon(painter = painterResource(id = R.drawable.ic_baseline_visibility_24), "Basic Icon Button", tint = ComposeColor.Purple500)
             }
             8.dp.HorizontalSpace()
             IconButton(onClick = { iconBtnResult.value = "You sent something. I know what that is. Huhuhahahaha..." }) {
@@ -35,7 +35,7 @@ fun ComposeIconButtons() {
             }
             8.dp.HorizontalSpace()
             IconButton(onClick = { iconBtnResult.value = "Gotta kill 'em all!" }) {
-                Icon(painter = painterResource(id = R.drawable.ic_baseline_catching_pokemon_24), "Basic Icon Button", tint = AppColor.Teal200)
+                Icon(painter = painterResource(id = R.drawable.ic_baseline_catching_pokemon_24), "Basic Icon Button", tint = ComposeColor.Teal200)
             }
             8.dp.HorizontalSpace()
             IconButton(onClick = { iconBtnResult.value = "Starting World War 3! Please wait..." }) {

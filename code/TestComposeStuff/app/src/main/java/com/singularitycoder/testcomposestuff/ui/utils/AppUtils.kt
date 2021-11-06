@@ -13,8 +13,14 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Outline
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.LayoutDirection
+import androidx.compose.ui.unit.TextUnit
+import androidx.compose.ui.unit.sp
 import com.singularitycoder.testcomposestuff.R
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
@@ -96,8 +102,63 @@ val animeImageList = listOf(
     R.drawable.ani36,
     R.drawable.ani37,
     R.drawable.ani38,
-    R.drawable.ani39
+    R.drawable.ani39,
+    R.drawable.ani40,
+    R.drawable.ani41,
+    R.drawable.ani42,
+    R.drawable.ani43,
+    R.drawable.ani44,
+    R.drawable.ani45,
+    R.drawable.ani46,
+    R.drawable.ani47,
+    R.drawable.ani48,
+    R.drawable.ani49,
+    R.drawable.ani50,
+    R.drawable.ani51,
+    R.drawable.ani52,
+    R.drawable.ani53,
+    R.drawable.ani54,
+    R.drawable.ani55,
+    R.drawable.ani56,
+    R.drawable.ani57,
+    R.drawable.ani58,
+    R.drawable.ani59,
+    R.drawable.ani60,
+    R.drawable.ani61,
+    R.drawable.ani62,
+    R.drawable.ani63,
+    R.drawable.ani64,
+    R.drawable.ani65,
+    R.drawable.ani66,
+    R.drawable.ani67,
+    R.drawable.ani68,
+    R.drawable.ani69,
+    R.drawable.ani70,
+    R.drawable.ani71,
+    R.drawable.ani72
 )
+
+// https://johncodeos.com/how-to-add-search-in-list-with-jetpack-compose/
+fun getCountriesList(): ArrayList<String> {
+    val isoCountryCodes = Locale.getISOCountries()
+    val countryListWithEmojis = ArrayList<String>()
+    for (countryCode in isoCountryCodes) {
+        val locale = Locale("", countryCode)
+        val countryName = locale.displayCountry
+        val flagOffset = 0x1F1E6
+        val asciiOffset = 0x41
+        val firstChar = Character.codePointAt(countryCode, 0) - asciiOffset + flagOffset
+        val secondChar = Character.codePointAt(countryCode, 1) - asciiOffset + flagOffset
+        val flag = (String(Character.toChars(firstChar)) + String(Character.toChars(secondChar)))
+        countryListWithEmojis.add(
+            buildAnnotatedString {
+                withStyle(style = SpanStyle(fontSize = 22.sp)) { append(flag) }
+                append("   $countryName")
+            }.toString()
+        )
+    }
+    return countryListWithEmojis
+}
 
 fun getNatureItemList(): List<Item> {
     val itemList = ArrayList<Item>()

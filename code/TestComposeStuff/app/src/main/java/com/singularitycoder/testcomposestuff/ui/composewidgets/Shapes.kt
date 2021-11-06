@@ -9,17 +9,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.google.accompanist.flowlayout.FlowRow
+import com.singularitycoder.testcomposestuff.ui.theme.ComposeColor
 import com.singularitycoder.testcomposestuff.ui.theme.ComposablesApp
 import com.singularitycoder.testcomposestuff.ui.theme.Ticket
-import com.singularitycoder.testcomposestuff.ui.utils.Board
-import com.singularitycoder.testcomposestuff.ui.utils.Composables
-import com.singularitycoder.testcomposestuff.ui.utils.CustomShape
+import com.singularitycoder.testcomposestuff.ui.utils.*
 
 @Composable
 fun ComposeShapes() {
@@ -51,15 +49,19 @@ fun ComposeShapes() {
         FlowRow {
             @Composable
             fun BoxShape(shape: Shape) {
-                Column(modifier = Modifier.wrapContentSize(Alignment.Center).clip(shape).padding(end = 8.dp, bottom = 8.dp)) {
-                    Box(modifier = Modifier.size(80.dp).background(Color.Blue)) {}
+                Column(modifier = Modifier.padding(bottom = 8.dp).wrapContentSize(Alignment.Center).clip(shape).padding(bottom = 0.dp)) {
+                    Box(modifier = Modifier.size(80.dp).background(ComposeColor.TitleColor).fillMaxSize()) {}
                 }
             }
 
             BoxShape(shape = RoundedCornerShape(16.dp))
+            8.dp.HorizontalSpace()
             BoxShape(shape = CutCornerShape(16.dp))
+            8.dp.HorizontalSpace()
             BoxShape(shape = RectangleShape)
+            8.dp.HorizontalSpace()
             BoxShape(shape = CustomShape())
+            8.dp.HorizontalSpace()
             BoxShape(shape = triangleShape)
 
             Ticket(modifier = Modifier)

@@ -14,7 +14,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.google.accompanist.flowlayout.FlowRow
-import com.singularitycoder.testcomposestuff.ui.theme.AppColor
+import com.singularitycoder.testcomposestuff.ui.theme.ComposeColor
 import com.singularitycoder.testcomposestuff.ui.theme.ComposablesApp
 import com.singularitycoder.testcomposestuff.ui.utils.Board
 import com.singularitycoder.testcomposestuff.ui.utils.Composables
@@ -45,7 +45,7 @@ fun ComposeCards() {
             Board(text = "Rounded Card\n\n\n\n", elevation = 4.dp, shape = RoundedCornerShape(size = 16.dp), textPadding = 16.dp)
             Board(text = "Cut Card\n\n\n\n", elevation = 4.dp, shape = CutCornerShape(size = 16.dp), textPadding = 16.dp)
             Board(text = "Colorful Card", backgroundColor = Color.Yellow)
-            Board(text = "Bordered Card", border = BorderStroke(1.dp, color = AppColor.Purple500))
+            Board(text = "Bordered Card", border = BorderStroke(1.dp, color = ComposeColor.Purple500))
             Board(text = "Card with Content Color", contentColor = Color.Magenta)
         }
     }

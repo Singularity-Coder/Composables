@@ -24,7 +24,7 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.fragment.app.DialogFragment
-import com.singularitycoder.testcomposestuff.ui.theme.AppColor
+import com.singularitycoder.testcomposestuff.ui.theme.ComposeColor
 
 class CustomDialogFragment(
     val title: String = "NA",
@@ -60,7 +60,7 @@ class CustomDialogFragment(
             text = text,
             fontSize = fontSize,
             fontWeight = fontWeight,
-            color = AppColor.LightBlack,
+            color = ComposeColor.LightBlack,
             textAlign = TextAlign.Start,
             modifier = Modifier.fillMaxWidth(),
             maxLines = 8,
@@ -70,7 +70,7 @@ class CustomDialogFragment(
         @Composable
         fun AlertBtn(actionText: String, action: () -> Unit) = Button(
             elevation = ButtonDefaults.elevation(defaultElevation = 0.dp, pressedElevation = 0.dp, disabledElevation = 0.dp),
-            colors = ButtonDefaults.buttonColors(backgroundColor = AppColor.Transparent, contentColor = AppColor.Purple500),
+            colors = ButtonDefaults.buttonColors(backgroundColor = ComposeColor.Transparent, contentColor = ComposeColor.Purple500),
             onClick = action
         ) { Text(actionText) }
 

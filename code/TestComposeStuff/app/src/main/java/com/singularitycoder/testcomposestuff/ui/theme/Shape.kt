@@ -46,12 +46,12 @@ fun Ticket(modifier: Modifier) = Text(
             shape = TicketShape(24.dp.toPx())
             clip = true
         }
-        .background(color = AppColor.TitleColor)
+        .background(color = ComposeColor.TitleColor)
         .drawBehind {
             scale(scale = 0.9f) {
                 drawPath(
                     path = drawTicketPath(size = size, cornerRadius = 24.dp.toPx()),
-                    color = AppColor.Teal200,
+                    color = ComposeColor.Teal200,
                     style = Stroke(
                         width = 2.dp.toPx(),
                         pathEffect = PathEffect.dashPathEffect(floatArrayOf(10f, 10f))

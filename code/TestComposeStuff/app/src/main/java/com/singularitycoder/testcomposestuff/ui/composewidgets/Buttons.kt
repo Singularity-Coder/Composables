@@ -10,7 +10,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.Share
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -24,7 +23,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.google.accompanist.flowlayout.FlowRow
-import com.singularitycoder.testcomposestuff.ui.theme.AppColor
+import com.singularitycoder.testcomposestuff.ui.theme.ComposeColor
 import com.singularitycoder.testcomposestuff.ui.theme.ComposablesApp
 import com.singularitycoder.testcomposestuff.ui.utils.Board
 import com.singularitycoder.testcomposestuff.ui.utils.Composables
@@ -40,7 +39,7 @@ fun ComposeButtons() {
                 text: String,
                 roundness: Dp = 4.dp,
                 isEnabled: Boolean = true,
-                colors: ButtonColors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.primary, contentColor = AppColor.White),
+                colors: ButtonColors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.primary, contentColor = ComposeColor.White),
                 action: () -> Unit
             ) = Button(
                 modifier = Modifier.padding(top = 8.dp, end = 8.dp),
@@ -54,7 +53,7 @@ fun ComposeButtons() {
             Btn(text = "Semi-Rounded", roundness = 12.dp) { buttonResult.value = "Semi-Rounded Button Clicked" }
             Btn(text = "Rounded", roundness = 24.dp) { buttonResult.value = "Rounded Button Clicked" }
             Btn(text = "Disabled", isEnabled = false) {}
-            Btn(text = "Colored", colors = ButtonDefaults.buttonColors(backgroundColor = AppColor.Teal500, contentColor = AppColor.Teal900)) {
+            Btn(text = "Colored", colors = ButtonDefaults.buttonColors(backgroundColor = ComposeColor.Teal500, contentColor = ComposeColor.Teal900)) {
                 buttonResult.value = "Colored Button Clicked"
             }
 
@@ -63,7 +62,7 @@ fun ComposeButtons() {
                 text: String,
                 roundness: Dp = 4.dp,
                 isEnabled: Boolean = true,
-                colors: ButtonColors = ButtonDefaults.outlinedButtonColors(backgroundColor = AppColor.Transparent, contentColor = AppColor.Purple500),
+                colors: ButtonColors = ButtonDefaults.outlinedButtonColors(backgroundColor = ComposeColor.Transparent, contentColor = ComposeColor.Purple500),
                 action: () -> Unit
             ) = OutlinedButton(
                 modifier = Modifier.padding(top = 8.dp, end = 8.dp),
@@ -74,7 +73,7 @@ fun ComposeButtons() {
             ) { Text(text = text) }
             OutlineBtn(text = "Outline") { buttonResult.value = "Outline Button Clicked" }
             OutlineBtn(text = "Disabled Outline", isEnabled = false) { }
-            OutlineBtn(text = "Colored Outline", colors = ButtonDefaults.outlinedButtonColors(contentColor = AppColor.Teal700)) {
+            OutlineBtn(text = "Colored Outline", colors = ButtonDefaults.outlinedButtonColors(contentColor = ComposeColor.Teal700)) {
                 buttonResult.value = "Colored Outline Button Clicked"
             }
             DefaultButton(actionText = "Rounded Outline") { buttonResult.value = "Rounded Outline Button Clicked" }
@@ -110,10 +109,10 @@ fun ComposeButtons() {
             Button(
                 modifier = Modifier.padding(top = 8.dp, end = 8.dp).background(brush = horizontalGradient).clip(RoundedCornerShape(4.dp)),
                 colors = ButtonDefaults.buttonColors(
-                    backgroundColor = AppColor.Transparent,
-                    contentColor = AppColor.White,
-                    disabledBackgroundColor = AppColor.Transparent,
-                    disabledContentColor = AppColor.Transparent
+                    backgroundColor = ComposeColor.Transparent,
+                    contentColor = ComposeColor.White,
+                    disabledBackgroundColor = ComposeColor.Transparent,
+                    disabledContentColor = ComposeColor.Transparent
                 ),
                 shape = RoundedCornerShape(size = 4.dp),
                 elevation = ButtonDefaults.elevation(
@@ -131,7 +130,7 @@ fun ComposeButtons() {
             )
             Text(
                 text = "Vertical Gradient",
-                color = AppColor.White,
+                color = ComposeColor.White,
                 modifier = Modifier
                     .padding(top = 8.dp, end = 8.dp)
                     .clickable(onClick = { buttonResult.value = "Vertical Gradient Button Clicked" })
@@ -148,7 +147,7 @@ fun ComposeButtons() {
                 text: String,
                 roundness: Dp = 4.dp,
                 isEnabled: Boolean = true,
-                colors: ButtonColors = ButtonDefaults.textButtonColors(backgroundColor = AppColor.Transparent, contentColor = AppColor.Purple500),
+                colors: ButtonColors = ButtonDefaults.textButtonColors(backgroundColor = ComposeColor.Transparent, contentColor = ComposeColor.Purple500),
                 action: () -> Unit
             ) = TextButton(
                 modifier = Modifier.padding(top = 8.dp, end = 8.dp),
@@ -159,7 +158,7 @@ fun ComposeButtons() {
             ) { Text(text = text) }
             TextBtn(text = "Text") { buttonResult.value = "Text Button Clicked" }
             TextBtn(text = "Disabled Text", isEnabled = false) {}
-            TextBtn(text = "Colored Text", colors = ButtonDefaults.outlinedButtonColors(contentColor = AppColor.Teal900)) {
+            TextBtn(text = "Colored Text", colors = ButtonDefaults.outlinedButtonColors(contentColor = ComposeColor.Teal900)) {
                 buttonResult.value = "Colored Text Button Clicked"
             }
         }

@@ -21,7 +21,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.singularitycoder.testcomposestuff.R
-import com.singularitycoder.testcomposestuff.ui.theme.AppColor
+import com.singularitycoder.testcomposestuff.ui.theme.ComposeColor
 import com.singularitycoder.testcomposestuff.ui.theme.ComposablesApp
 import com.singularitycoder.testcomposestuff.ui.utils.Board
 import com.singularitycoder.testcomposestuff.ui.utils.Composables
@@ -84,7 +84,7 @@ fun ComposeTopAppBars() {
                 Icon(
                     painter = painterResource(id = R.drawable.ic_twitter),
                     contentDescription = null,
-                    tint = AppColor.TwitterColor,
+                    tint = ComposeColor.TwitterColor,
                     modifier = Modifier.fillMaxWidth().padding(end = 16.dp)
                 )
             },
