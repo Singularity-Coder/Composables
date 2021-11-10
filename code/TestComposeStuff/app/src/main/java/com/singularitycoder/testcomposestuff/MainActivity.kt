@@ -13,6 +13,7 @@ import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
@@ -23,13 +24,15 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
-import androidx.fragment.app.FragmentTransaction
 import com.google.accompanist.flowlayout.FlowRow
 import com.singularitycoder.testcomposestuff.ui.composewidgets.*
-import com.singularitycoder.testcomposestuff.ui.theme.ComposeColor
 import com.singularitycoder.testcomposestuff.ui.theme.ComposablesApp
-import com.singularitycoder.testcomposestuff.ui.utils.*
+import com.singularitycoder.testcomposestuff.ui.theme.ComposeColor
+import com.singularitycoder.testcomposestuff.ui.utils.Board
 import com.singularitycoder.testcomposestuff.ui.utils.Composables.*
+import com.singularitycoder.testcomposestuff.ui.utils.SetStatusBarColor
+import com.singularitycoder.testcomposestuff.ui.utils.VerticalSpace
+import com.singularitycoder.testcomposestuff.ui.utils.toUpCase
 import kotlinx.coroutines.launch
 
 /**
@@ -92,7 +95,6 @@ class MainActivity : AppCompatActivity() {
         val coroutineScope = rememberCoroutineScope()
 
         val switchResult = remember { mutableStateOf("") }
-        val checkBoxResult = remember { mutableStateOf("") }
 
         SetStatusBarColor()
 
@@ -129,26 +131,20 @@ class MainActivity : AppCompatActivity() {
                     ComposeVerticalLists()
                     ComposeHorizontalLists()
                     ComposeVerticalGridLists()
+                    ComposeCheckBoxes()
+                    ComposeBoxLayout()
+                    ComposeConstraintLayout()
 
                     Board(title = SWITCH.value, result = switchResult.value) {
+                        // NOS on
+                        // Jet Booster on
+                        // Plasma Booster on
                         val checkedState = remember { mutableStateOf(true) }
                         Switch(
                             checked = checkedState.value,
                             onCheckedChange = {
                                 checkedState.value = it
                                 switchResult.value = if (it) "ON" else "OFF"
-                            }
-                        )
-                    }
-
-                    Board(title = CHECKBOX.value, result = checkBoxResult.value) {
-                        // Tristate Checkbox
-                        val checkedState = remember { mutableStateOf(true) }
-                        Checkbox(
-                            checked = checkedState.value,
-                            onCheckedChange = {
-                                checkedState.value = it
-                                checkBoxResult.value = if (it) "Checked" else "Not Checked"
                             }
                         )
                     }
@@ -184,7 +180,7 @@ class MainActivity : AppCompatActivity() {
                     }
 
                     Board(title = CANVAS.value) {
-                        Canvas(modifier = Modifier.fillMaxSize()) {
+                        Canvas(modifier = Modifier.fillMaxWidth().height(128.dp)) {
                             drawRect(Color.Blue, topLeft = Offset(0f, 0f), size = Size(this.size.width, 55f))
                             drawCircle(Color.Red, center = Offset(50f, 200f), radius = 40f)
                             drawLine(color = Color.Green, start = Offset(20f, 0f), end = Offset(200f, 200f), strokeWidth = 5f)
@@ -312,45 +308,6 @@ class MainActivity : AppCompatActivity() {
                     Board(title = STACK_LAYOUT.value) {
                         FlowRow {
 
-                        }
-                    }
-
-                    Board(title = CONSTRAINT_LAYOUT.value) {
-                        ConstraintLayout(modifier = Modifier.size(200.dp)) {
-                            val (redBox, blueBox, yellowBox, text) = createRefs()
-                            Box(modifier = Modifier
-                                .size(50.dp)
-                                .background(Color.Red)
-                                .constrainAs(redBox) {})
-                            Box(modifier = Modifier
-                                .size(50.dp)
-                                .background(Color.Blue)
-                                .constrainAs(blueBox) {
-                                    top.linkTo(redBox.bottom)
-                                    start.linkTo(redBox.end)
-                                })
-                            Box(modifier = Modifier
-                                .size(50.dp)
-                                .background(Color.Yellow)
-                                .constrainAs(yellowBox) {
-                                    bottom.linkTo(blueBox.bottom)
-                                    start.linkTo(blueBox.end, 20.dp)
-                                })
-                            Text("Hello World", modifier = Modifier.constrainAs(text) {
-                                top.linkTo(parent.top)
-                                start.linkTo(yellowBox.start)
-                            })
-                        }
-                    }
-
-                    Board(title = BOX_LAYOUT.value) {
-                        // Stack elements
-                        Box(modifier = Modifier.fillMaxSize()) {
-                            Card(backgroundColor = Color.Black, modifier = Modifier.padding(all = 16.dp)) { Text(text = "Black") }
-                            32.dp.HorizontalSpace()
-                            Card(backgroundColor = Color.Magenta, modifier = Modifier.padding(all = 16.dp)) { Text(text = "Megenta") }
-                            64.dp.HorizontalSpace()
-                            Card(backgroundColor = Color.Yellow, modifier = Modifier.padding(all = 16.dp)) { Text(text = "Yellow") }
                         }
                     }
 
