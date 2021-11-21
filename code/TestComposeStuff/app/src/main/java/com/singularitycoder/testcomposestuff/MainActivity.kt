@@ -1,8 +1,11 @@
 package com.singularitycoder.testcomposestuff
 
+import android.Manifest
 import android.os.Bundle
 import android.util.Log
+import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.compose.setContent
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
@@ -13,7 +16,6 @@ import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
@@ -23,16 +25,12 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.constraintlayout.compose.ConstraintLayout
 import com.google.accompanist.flowlayout.FlowRow
 import com.singularitycoder.testcomposestuff.ui.composewidgets.*
 import com.singularitycoder.testcomposestuff.ui.theme.ComposablesApp
 import com.singularitycoder.testcomposestuff.ui.theme.ComposeColor
-import com.singularitycoder.testcomposestuff.ui.utils.Board
+import com.singularitycoder.testcomposestuff.ui.utils.*
 import com.singularitycoder.testcomposestuff.ui.utils.Composables.*
-import com.singularitycoder.testcomposestuff.ui.utils.SetStatusBarColor
-import com.singularitycoder.testcomposestuff.ui.utils.VerticalSpace
-import com.singularitycoder.testcomposestuff.ui.utils.toUpCase
 import kotlinx.coroutines.launch
 
 /**
@@ -95,6 +93,7 @@ class MainActivity : AppCompatActivity() {
         val coroutineScope = rememberCoroutineScope()
 
         val switchResult = remember { mutableStateOf("") }
+        val permissionsResult = remember { mutableStateOf("") }
 
         SetStatusBarColor()
 
@@ -134,6 +133,47 @@ class MainActivity : AppCompatActivity() {
                     ComposeCheckBoxes()
                     ComposeBoxLayout()
                     ComposeConstraintLayout()
+
+                    Board(title = PERMISSIONS.value, result = permissionsResult.value) {
+                        val permissionsArray = arrayOf(
+                            Manifest.permission.READ_CONTACTS,
+                            Manifest.permission.ACCESS_FINE_LOCATION,
+                            Manifest.permission.ACCESS_COARSE_LOCATION,
+                            Manifest.permission.READ_EXTERNAL_STORAGE,
+                            Manifest.permission.CAMERA,
+                        )
+                        val showRationaleAlert = remember { mutableStateOf(false) }
+                        val composeSinglePermissionResult = rememberLauncherForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted: Boolean ->
+                            if (isGranted) permissionsResult.value = "Camera Permission Granted" else showRationaleAlert.value = true
+                        }
+                        val composeMultiplePermissionResult = rememberLauncherForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions: Map<String, @JvmSuppressWildcards Boolean> ->
+                            var grantedPermissionsCount = 0
+                            permissions.entries.forEach { it: Map.Entry<String, @JvmSuppressWildcards Boolean> ->
+                                Log.i("LOG", "${it.key} = ${it.value}")
+                                if (it.value) grantedPermissionsCount++
+                            }
+                            if (permissions.size == grantedPermissionsCount) permissionsResult.value = "All Permissions Granted" else showRationaleAlert.value = true
+                        }
+                        val context = LocalContext.current
+
+                        if (showRationaleAlert.value) {
+                            SimpleAlertDialog(
+                                title = "Grant Camera Permissions",
+                                message = "Please grant this permissions for this App to work properly!",
+                                positiveBtnText = "Settings",
+                                negativeBtnText = "Cancel",
+                                positiveBtnAction = {
+                                    showRationaleAlert.value = false
+                                    showAppSettings(context)
+                                },
+                                negativeBtnAction = { showRationaleAlert.value = false },
+                                dismissAction = { showRationaleAlert.value = false } // If false then dialog cancels on touch of scrim
+                            )
+                        }
+
+                        DefaultButton(actionText = "Grant Single Permission") { composeSinglePermissionResult.launch(Manifest.permission.CAMERA) }
+                        DefaultButton(actionText = "Grant Multiple Permissions") { composeMultiplePermissionResult.launch(permissionsArray) }
+                    }
 
                     Board(title = SWITCH.value, result = switchResult.value) {
                         // NOS on

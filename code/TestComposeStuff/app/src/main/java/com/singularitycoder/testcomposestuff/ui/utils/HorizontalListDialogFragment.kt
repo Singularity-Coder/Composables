@@ -18,6 +18,7 @@ import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ComposeView
+import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.fragment.app.DialogFragment
@@ -42,6 +43,7 @@ class HorizontalListDialogFragment : DialogFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         return ComposeView(requireContext()).apply {
+            setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
             setContent {
                 MaterialTheme {
                     Surface(color = MaterialTheme.colors.background) {
@@ -73,22 +75,16 @@ class HorizontalListDialogFragment : DialogFragment() {
 }
 
 @Composable
-fun Stories() {
-    LazyRow {
-        items(getAnimeItemList()) { it: Item -> StoryListItem(item = it, isLastItem = it.id == getAnimeItemList().size) }
-    }
+fun Stories() = LazyRow {
+    items(getAnimeItemList()) { it: Item -> StoryListItem(item = it, isLastItem = it.id == getAnimeItemList().size) }
 }
 
 @Composable
-fun Anime() {
-    LazyRow {
-        items(items = getAnimeItemList()) { it: Item -> HorizontalAnimeListItem(item = it, isLastItem = it.id == getAnimeItemList().size) }
-    }
+fun Anime() = LazyRow {
+    items(items = getAnimeItemList()) { it: Item -> HorizontalAnimeListItem(item = it, isLastItem = it.id == getAnimeItemList().size) }
 }
 
 @Composable
-fun Nature() {
-    LazyRow {
-        items(items = getNatureItemList()) { it: Item -> HorizontalNatureListItem(item = it, isLastItem = it.id == getNatureItemList().size) }
-    }
+fun Nature() = LazyRow {
+    items(items = getNatureItemList()) { it: Item -> HorizontalNatureListItem(item = it, isLastItem = it.id == getNatureItemList().size) }
 }

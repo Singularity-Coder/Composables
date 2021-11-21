@@ -15,6 +15,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.ComposeView
+import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.compose.ui.unit.dp
 import androidx.fragment.app.DialogFragment
 import com.singularitycoder.testcomposestuff.ui.theme.AndroidColor
@@ -37,6 +38,7 @@ class GridListDialogFragment : DialogFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         return ComposeView(requireContext()).apply {
+            setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
             setContent {
                 MaterialTheme {
                     Surface(color = MaterialTheme.colors.background) {
@@ -53,18 +55,16 @@ class GridListDialogFragment : DialogFragment() {
 
 @ExperimentalFoundationApi
 @Composable
-fun GridItemList() {
-    LazyVerticalGrid(
-        cells = GridCells.Fixed(2),
-        contentPadding = PaddingValues(start = 16.dp, top = 16.dp, end = 16.dp, bottom = 16.dp),
-        content = {
-            items(getAnimeItemList().size) { index: Int ->
-                when {
-                    index == 0 -> GridAnimeListItem(item = getAnimeItemList()[index], paddingStart = 0.dp, paddingEnd = 8.dp)
-                    index % 2 == 0 -> GridAnimeListItem(item = getAnimeItemList()[index], paddingStart = 0.dp, paddingEnd = 8.dp)
-                    else -> GridAnimeListItem(item = getAnimeItemList()[index], paddingStart = 8.dp, paddingEnd = 0.dp)
-                }
+fun GridItemList() = LazyVerticalGrid(
+    cells = GridCells.Fixed(2),
+    contentPadding = PaddingValues(16.dp),
+    content = {
+        items(getAnimeItemList().size) { index: Int ->
+            when {
+                index == 0 -> GridAnimeListItem(item = getAnimeItemList()[index], paddingStart = 0.dp, paddingEnd = 8.dp)
+                index % 2 == 0 -> GridAnimeListItem(item = getAnimeItemList()[index], paddingStart = 0.dp, paddingEnd = 8.dp)
+                else -> GridAnimeListItem(item = getAnimeItemList()[index], paddingStart = 8.dp, paddingEnd = 0.dp)
             }
         }
-    )
-}
+    }
+)

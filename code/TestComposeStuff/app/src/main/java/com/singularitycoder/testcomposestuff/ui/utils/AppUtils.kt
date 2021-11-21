@@ -2,6 +2,9 @@ package com.singularitycoder.testcomposestuff.ui.utils
 
 import android.content.Context
 import android.content.ContextWrapper
+import android.content.Intent
+import android.net.Uri
+import android.provider.Settings
 import androidx.annotation.DrawableRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.material.ScaffoldState
@@ -15,11 +18,9 @@ import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.LayoutDirection
-import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.sp
 import com.singularitycoder.testcomposestuff.R
 import kotlinx.coroutines.CoroutineScope
@@ -135,7 +136,12 @@ val animeImageList = listOf(
     R.drawable.ani69,
     R.drawable.ani70,
     R.drawable.ani71,
-    R.drawable.ani72
+    R.drawable.ani72,
+    R.drawable.ani73,
+    R.drawable.ani74,
+    R.drawable.ani75,
+    R.drawable.ani76,
+    R.drawable.ani77
 )
 
 // https://johncodeos.com/how-to-add-search-in-list-with-jetpack-compose/
@@ -237,6 +243,14 @@ fun String.capFirstChar(): String = this.replaceFirstChar { if (it.isLowerCase()
 @Stable
 fun myColor(color: String): Color = Color("0xFF$color".toLong())
 
+fun showAppSettings(context: Context?) {
+    context ?: return
+    val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
+        data = Uri.fromParts("package", context.packageName, null)
+    }
+    context.startActivity(intent)
+}
+
 class CustomShape : Shape {
     override fun createOutline(size: Size, layoutDirection: LayoutDirection, density: Density): Outline {
         val path = Path().apply {
@@ -281,6 +295,7 @@ enum class Composables(val value: String) {
     BOTTOM_APP_BAR(value = "Bottom App Bar"),
     BOTTOM_NAVIGATION_BAR(value = "Bottom Navigation Bar"),
     SWITCH(value = "Switch"),
+    PERMISSIONS(value = "Permissions"),
     CHECKBOX(value = "Checkbox"),
     RADIO_BUTTON(value = "Radio Button"),
     SLIDER(value = "Slider"),
