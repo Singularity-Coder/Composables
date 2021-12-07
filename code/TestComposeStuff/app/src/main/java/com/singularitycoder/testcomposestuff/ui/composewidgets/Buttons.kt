@@ -25,9 +25,9 @@ import androidx.compose.ui.unit.sp
 import com.google.accompanist.flowlayout.FlowRow
 import com.singularitycoder.testcomposestuff.ui.theme.ComposeColor
 import com.singularitycoder.testcomposestuff.ui.theme.ComposablesApp
-import com.singularitycoder.testcomposestuff.ui.utils.Board
-import com.singularitycoder.testcomposestuff.ui.utils.Composables
-import com.singularitycoder.testcomposestuff.ui.utils.DefaultButton
+import com.singularitycoder.testcomposestuff.utils.Board
+import com.singularitycoder.testcomposestuff.utils.Composables
+import com.singularitycoder.testcomposestuff.utils.DefaultButton
 
 @Composable
 fun ComposeButtons() {

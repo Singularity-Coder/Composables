@@ -1,4 +1,4 @@
-package com.singularitycoder.testcomposestuff.ui.utils
+package com.singularitycoder.testcomposestuff.utils
 
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*

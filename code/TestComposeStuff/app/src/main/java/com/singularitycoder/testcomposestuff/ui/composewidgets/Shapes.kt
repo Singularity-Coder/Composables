@@ -17,7 +17,7 @@ import com.google.accompanist.flowlayout.FlowRow
 import com.singularitycoder.testcomposestuff.ui.theme.ComposeColor
 import com.singularitycoder.testcomposestuff.ui.theme.ComposablesApp
 import com.singularitycoder.testcomposestuff.ui.theme.Ticket
-import com.singularitycoder.testcomposestuff.ui.utils.*
+import com.singularitycoder.testcomposestuff.utils.*
 
 @Composable
 fun ComposeShapes() {

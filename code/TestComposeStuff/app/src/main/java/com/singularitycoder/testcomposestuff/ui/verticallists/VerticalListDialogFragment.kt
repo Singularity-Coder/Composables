@@ -1,4 +1,4 @@
-package com.singularitycoder.testcomposestuff.ui.utils.verticallists
+package com.singularitycoder.testcomposestuff.ui.verticallists
 
 import android.graphics.Color
 import android.os.Bundle
@@ -16,9 +16,9 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.fragment.app.DialogFragment
 import com.singularitycoder.testcomposestuff.ui.theme.AndroidColor
-import com.singularitycoder.testcomposestuff.ui.utils.TopAppBarForList
-import com.singularitycoder.testcomposestuff.ui.utils.VerticalListItem
-import com.singularitycoder.testcomposestuff.ui.utils.getNatureItemList
+import com.singularitycoder.testcomposestuff.utils.TopAppBarForList
+import com.singularitycoder.testcomposestuff.utils.VerticalListItem
+import com.singularitycoder.testcomposestuff.utils.getNatureItemList
 
 class VerticalListDialogFragment : DialogFragment() {
 

@@ -8,8 +8,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.fragment.app.FragmentTransaction
 import com.google.accompanist.flowlayout.FlowRow
 import com.singularitycoder.testcomposestuff.R
+import com.singularitycoder.testcomposestuff.ui.CustomDialogFragment
 import com.singularitycoder.testcomposestuff.ui.theme.ComposablesApp
-import com.singularitycoder.testcomposestuff.ui.utils.*
+import com.singularitycoder.testcomposestuff.utils.*
 
 @Composable
 fun ComposeAlertDialogs() {

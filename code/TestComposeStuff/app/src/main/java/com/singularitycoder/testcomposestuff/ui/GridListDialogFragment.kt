@@ -1,4 +1,4 @@
-package com.singularitycoder.testcomposestuff.ui.utils
+package com.singularitycoder.testcomposestuff.ui
 
 import android.graphics.Color
 import android.os.Bundle
@@ -19,6 +19,9 @@ import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.compose.ui.unit.dp
 import androidx.fragment.app.DialogFragment
 import com.singularitycoder.testcomposestuff.ui.theme.AndroidColor
+import com.singularitycoder.testcomposestuff.utils.GridAnimeListItem
+import com.singularitycoder.testcomposestuff.utils.TopAppBarForList
+import com.singularitycoder.testcomposestuff.utils.getAnimeItemList
 
 @ExperimentalFoundationApi
 class GridListDialogFragment : DialogFragment() {

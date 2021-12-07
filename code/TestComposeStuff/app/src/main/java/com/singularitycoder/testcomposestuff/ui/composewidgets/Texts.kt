@@ -24,8 +24,8 @@ import androidx.compose.ui.unit.sp
 import com.singularitycoder.testcomposestuff.R
 import com.singularitycoder.testcomposestuff.ui.theme.ComposablesApp
 import com.singularitycoder.testcomposestuff.ui.theme.PlayFairFamily
-import com.singularitycoder.testcomposestuff.ui.utils.Board
-import com.singularitycoder.testcomposestuff.ui.utils.Composables
+import com.singularitycoder.testcomposestuff.utils.Board
+import com.singularitycoder.testcomposestuff.utils.Composables
 
 @Composable
 fun ComposeTexts() {

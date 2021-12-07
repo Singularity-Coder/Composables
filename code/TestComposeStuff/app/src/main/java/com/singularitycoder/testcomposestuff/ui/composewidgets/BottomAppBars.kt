@@ -12,8 +12,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.tooling.preview.Preview
 import com.singularitycoder.testcomposestuff.ui.theme.ComposablesApp
-import com.singularitycoder.testcomposestuff.ui.utils.Board
-import com.singularitycoder.testcomposestuff.ui.utils.Composables
+import com.singularitycoder.testcomposestuff.utils.Board
+import com.singularitycoder.testcomposestuff.utils.Composables
 
 // Fab cut out AppBar
 

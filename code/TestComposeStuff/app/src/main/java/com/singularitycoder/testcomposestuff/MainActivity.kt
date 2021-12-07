@@ -29,8 +29,8 @@ import com.google.accompanist.flowlayout.FlowRow
 import com.singularitycoder.testcomposestuff.ui.composewidgets.*
 import com.singularitycoder.testcomposestuff.ui.theme.ComposablesApp
 import com.singularitycoder.testcomposestuff.ui.theme.ComposeColor
-import com.singularitycoder.testcomposestuff.ui.utils.*
-import com.singularitycoder.testcomposestuff.ui.utils.Composables.*
+import com.singularitycoder.testcomposestuff.utils.*
+import com.singularitycoder.testcomposestuff.utils.Composables.*
 import kotlinx.coroutines.launch
 
 /**
@@ -93,7 +93,6 @@ class MainActivity : AppCompatActivity() {
         val coroutineScope = rememberCoroutineScope()
 
         val switchResult = remember { mutableStateOf("") }
-        val permissionsResult = remember { mutableStateOf("") }
 
         SetStatusBarColor()
 
@@ -133,47 +132,7 @@ class MainActivity : AppCompatActivity() {
                     ComposeCheckBoxes()
                     ComposeBoxLayout()
                     ComposeConstraintLayout()
-
-                    Board(title = PERMISSIONS.value, result = permissionsResult.value) {
-                        val permissionsArray = arrayOf(
-                            Manifest.permission.READ_CONTACTS,
-                            Manifest.permission.ACCESS_FINE_LOCATION,
-                            Manifest.permission.ACCESS_COARSE_LOCATION,
-                            Manifest.permission.READ_EXTERNAL_STORAGE,
-                            Manifest.permission.CAMERA,
-                        )
-                        val showRationaleAlert = remember { mutableStateOf(false) }
-                        val composeSinglePermissionResult = rememberLauncherForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted: Boolean ->
-                            if (isGranted) permissionsResult.value = "Camera Permission Granted" else showRationaleAlert.value = true
-                        }
-                        val composeMultiplePermissionResult = rememberLauncherForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions: Map<String, @JvmSuppressWildcards Boolean> ->
-                            var grantedPermissionsCount = 0
-                            permissions.entries.forEach { it: Map.Entry<String, @JvmSuppressWildcards Boolean> ->
-                                Log.i("LOG", "${it.key} = ${it.value}")
-                                if (it.value) grantedPermissionsCount++
-                            }
-                            if (permissions.size == grantedPermissionsCount) permissionsResult.value = "All Permissions Granted" else showRationaleAlert.value = true
-                        }
-                        val context = LocalContext.current
-
-                        if (showRationaleAlert.value) {
-                            SimpleAlertDialog(
-                                title = "Grant Camera Permissions",
-                                message = "Please grant this permissions for this App to work properly!",
-                                positiveBtnText = "Settings",
-                                negativeBtnText = "Cancel",
-                                positiveBtnAction = {
-                                    showRationaleAlert.value = false
-                                    showAppSettings(context)
-                                },
-                                negativeBtnAction = { showRationaleAlert.value = false },
-                                dismissAction = { showRationaleAlert.value = false } // If false then dialog cancels on touch of scrim
-                            )
-                        }
-
-                        DefaultButton(actionText = "Grant Single Permission") { composeSinglePermissionResult.launch(Manifest.permission.CAMERA) }
-                        DefaultButton(actionText = "Grant Multiple Permissions") { composeMultiplePermissionResult.launch(permissionsArray) }
-                    }
+                    ComposePermissions()
 
                     Board(title = SWITCH.value, result = switchResult.value) {
                         // NOS on

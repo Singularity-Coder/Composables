@@ -1,11 +1,14 @@
 package com.singularitycoder.testcomposestuff.ui.composewidgets
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.fragment.app.FragmentTransaction
-import com.singularitycoder.testcomposestuff.ui.utils.*
-import com.singularitycoder.testcomposestuff.ui.utils.verticallists.CountriesListDialogFragment
-import com.singularitycoder.testcomposestuff.ui.utils.verticallists.VerticalListDialogFragment
+import com.singularitycoder.testcomposestuff.ui.theme.ComposablesApp
+import com.singularitycoder.testcomposestuff.utils.*
+import com.singularitycoder.testcomposestuff.ui.verticallists.CountriesListDialogFragment
+import com.singularitycoder.testcomposestuff.ui.verticallists.VerticalListDialogFragment
 
 @Composable
 fun ComposeVerticalLists() {
@@ -43,3 +46,8 @@ fun ComposeVerticalLists() {
         }
     }
 }
+
+@ExperimentalFoundationApi
+@Preview(showBackground = true)
+@Composable
+fun ComposeVerticalListsPreview() = ComposablesApp { ComposeVerticalLists() }

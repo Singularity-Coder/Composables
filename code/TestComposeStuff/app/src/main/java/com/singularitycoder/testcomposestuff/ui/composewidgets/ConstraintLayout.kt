@@ -14,8 +14,8 @@ import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import com.singularitycoder.testcomposestuff.ui.theme.ComposablesApp
 import com.singularitycoder.testcomposestuff.ui.theme.ComposeColor
-import com.singularitycoder.testcomposestuff.ui.utils.Board
-import com.singularitycoder.testcomposestuff.ui.utils.Composables
+import com.singularitycoder.testcomposestuff.utils.Board
+import com.singularitycoder.testcomposestuff.utils.Composables
 
 @Composable
 fun ComposeConstraintLayout() {
@@ -41,6 +41,7 @@ fun ComposeConstraintLayout() {
                 end.linkTo(parent.end)
                 bottom.linkTo(parent.bottom)
             })
+
             Box(modifier = Modifier.size(24.dp).clip(CircleShape).background(ComposeColor.MdCyan200).constrainAs(color200Box) {
                 end.linkTo(color900Box.start, 12.dp)
                 top.linkTo(color900Box.top)

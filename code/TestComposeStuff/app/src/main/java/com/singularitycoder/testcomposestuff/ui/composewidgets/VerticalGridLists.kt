@@ -3,8 +3,11 @@ package com.singularitycoder.testcomposestuff.ui.composewidgets
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.fragment.app.FragmentTransaction
-import com.singularitycoder.testcomposestuff.ui.utils.*
+import com.singularitycoder.testcomposestuff.ui.GridListDialogFragment
+import com.singularitycoder.testcomposestuff.ui.theme.ComposablesApp
+import com.singularitycoder.testcomposestuff.utils.*
 
 @ExperimentalFoundationApi
 @Composable
@@ -24,3 +27,8 @@ fun ComposeVerticalGridLists() {
         }
     }
 }
+
+@ExperimentalFoundationApi
+@Preview(showBackground = true)
+@Composable
+fun ComposeVerticalGridListsPreview() = ComposablesApp { ComposeVerticalGridLists() }

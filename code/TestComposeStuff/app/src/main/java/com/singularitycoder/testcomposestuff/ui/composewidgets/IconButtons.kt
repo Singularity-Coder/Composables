@@ -13,9 +13,9 @@ import com.google.accompanist.flowlayout.FlowRow
 import com.singularitycoder.testcomposestuff.R
 import com.singularitycoder.testcomposestuff.ui.theme.ComposeColor
 import com.singularitycoder.testcomposestuff.ui.theme.ComposablesApp
-import com.singularitycoder.testcomposestuff.ui.utils.Board
-import com.singularitycoder.testcomposestuff.ui.utils.Composables
-import com.singularitycoder.testcomposestuff.ui.utils.HorizontalSpace
+import com.singularitycoder.testcomposestuff.utils.Board
+import com.singularitycoder.testcomposestuff.utils.Composables
+import com.singularitycoder.testcomposestuff.utils.HorizontalSpace
 
 @Composable
 fun ComposeIconButtons() {

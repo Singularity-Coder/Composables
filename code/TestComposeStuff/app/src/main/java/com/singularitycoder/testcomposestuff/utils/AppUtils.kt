@@ -1,4 +1,4 @@
-package com.singularitycoder.testcomposestuff.ui.utils
+package com.singularitycoder.testcomposestuff.utils
 
 import android.content.Context
 import android.content.ContextWrapper
@@ -141,7 +141,12 @@ val animeImageList = listOf(
     R.drawable.ani74,
     R.drawable.ani75,
     R.drawable.ani76,
-    R.drawable.ani77
+    R.drawable.ani77,
+    R.drawable.ani78,
+    R.drawable.ani79,
+    R.drawable.ani80,
+    R.drawable.ani81,
+    R.drawable.ani82
 )
 
 // https://johncodeos.com/how-to-add-search-in-list-with-jetpack-compose/

@@ -3,7 +3,8 @@ package com.singularitycoder.testcomposestuff.ui.composewidgets
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 import androidx.fragment.app.FragmentTransaction
-import com.singularitycoder.testcomposestuff.ui.utils.*
+import com.singularitycoder.testcomposestuff.ui.HorizontalListDialogFragment
+import com.singularitycoder.testcomposestuff.utils.*
 
 @Composable
 fun ComposeHorizontalLists() {

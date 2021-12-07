@@ -1,4 +1,4 @@
-package com.singularitycoder.testcomposestuff.ui.utils
+package com.singularitycoder.testcomposestuff.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -26,6 +26,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.fragment.app.DialogFragment
 import com.singularitycoder.testcomposestuff.ui.theme.ComposeColor
+import com.singularitycoder.testcomposestuff.utils.VerticalSpace
 
 class CustomDialogFragment(
     val title: String = "NA",

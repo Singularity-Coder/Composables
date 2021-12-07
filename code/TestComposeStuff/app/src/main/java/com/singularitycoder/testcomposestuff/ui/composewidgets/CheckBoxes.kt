@@ -17,9 +17,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.singularitycoder.testcomposestuff.ui.theme.ComposablesApp
 import com.singularitycoder.testcomposestuff.ui.theme.ComposeColor
-import com.singularitycoder.testcomposestuff.ui.utils.Board
-import com.singularitycoder.testcomposestuff.ui.utils.Composables
-import com.singularitycoder.testcomposestuff.ui.utils.HorizontalSpace
+import com.singularitycoder.testcomposestuff.utils.Board
+import com.singularitycoder.testcomposestuff.utils.Composables
+import com.singularitycoder.testcomposestuff.utils.HorizontalSpace
 
 @Composable
 fun ComposeCheckBoxes() {

@@ -24,7 +24,7 @@ import androidx.compose.ui.unit.toSize
 import com.google.accompanist.flowlayout.FlowRow
 import com.singularitycoder.testcomposestuff.ui.theme.ComposeColor
 import com.singularitycoder.testcomposestuff.ui.theme.ComposablesApp
-import com.singularitycoder.testcomposestuff.ui.utils.*
+import com.singularitycoder.testcomposestuff.utils.*
 
 // Not working for some reason
 

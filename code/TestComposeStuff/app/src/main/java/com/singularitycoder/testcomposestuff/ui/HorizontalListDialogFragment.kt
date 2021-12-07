@@ -1,4 +1,4 @@
-package com.singularitycoder.testcomposestuff.ui.utils
+package com.singularitycoder.testcomposestuff.ui
 
 import android.graphics.Color
 import android.os.Bundle
@@ -23,6 +23,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.fragment.app.DialogFragment
 import com.singularitycoder.testcomposestuff.ui.theme.AndroidColor
+import com.singularitycoder.testcomposestuff.utils.*
 
 // App store wide posters
 // Scroll 2 sets at once like apps or music

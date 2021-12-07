@@ -25,10 +25,10 @@ import androidx.compose.ui.unit.sp
 import com.singularitycoder.testcomposestuff.R
 import com.singularitycoder.testcomposestuff.ui.theme.ComposeColor
 import com.singularitycoder.testcomposestuff.ui.theme.ComposablesApp
-import com.singularitycoder.testcomposestuff.ui.utils.Board
-import com.singularitycoder.testcomposestuff.ui.utils.Composables
-import com.singularitycoder.testcomposestuff.ui.utils.Feedback
-import com.singularitycoder.testcomposestuff.ui.utils.VerticalSpace
+import com.singularitycoder.testcomposestuff.utils.Board
+import com.singularitycoder.testcomposestuff.utils.Composables
+import com.singularitycoder.testcomposestuff.utils.Feedback
+import com.singularitycoder.testcomposestuff.utils.VerticalSpace
 
 @Composable
 fun ComposeTextFields() {
@@ -132,6 +132,7 @@ fun ComposeTextFields() {
                 errorIndicatorColor = ComposeColor.ErrorDark
             )
         )
+
         Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
             @Composable
             fun Words(text: String, modifier: Modifier = Modifier.fillMaxWidth(), textAlign: TextAlign = TextAlign.End) {

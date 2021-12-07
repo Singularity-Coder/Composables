@@ -14,10 +14,10 @@ import androidx.compose.ui.unit.dp
 import com.singularitycoder.testcomposestuff.R
 import com.singularitycoder.testcomposestuff.ui.theme.ComposeColor
 import com.singularitycoder.testcomposestuff.ui.theme.ComposablesApp
-import com.singularitycoder.testcomposestuff.ui.utils.Board
-import com.singularitycoder.testcomposestuff.ui.utils.Composables
-import com.singularitycoder.testcomposestuff.ui.utils.HorizontalSpace
-import com.singularitycoder.testcomposestuff.ui.utils.VerticalSpace
+import com.singularitycoder.testcomposestuff.utils.Board
+import com.singularitycoder.testcomposestuff.utils.Composables
+import com.singularitycoder.testcomposestuff.utils.HorizontalSpace
+import com.singularitycoder.testcomposestuff.utils.VerticalSpace
 
 @Composable
 fun ComposeProgressBars() {
@@ -33,8 +33,7 @@ fun ComposeProgressBars() {
             LinearProgressIndicator(modifier = Modifier.fillMaxWidth())
             8.dp.VerticalSpace()
             CircularProgressIndicator()
-            24.dp.VerticalSpace()
-            8.dp.VerticalSpace()
+            32.dp.VerticalSpace()
             LinearProgressIndicator(progress = animatedProgress, modifier = Modifier.fillMaxWidth())
             8.dp.VerticalSpace()
             CircularProgressIndicator(progress = animatedProgress)
